@@ -1,0 +1,142 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+     
+    },
+  },
+};
+/************************************************************* */
+// components/Sidebar.js
+import React from 'react';
+
+const Sidebar = ({ navItems, onNavClick, activeNav }) => {
+  return (
+    <aside className="w-60 bg-gray-900 text-white h-screen p-4">
+      <h2 className="text-xl font-bold mb-6">Categories</h2>
+      <ul className="space-y-3">
+        {navItems.map((item) => (
+          <li
+            key={item.id}
+            onClick={() => onNavClick(item.id)}
+            className={`cursor-pointer p-2 rounded ${
+              activeNav === item.id ? 'bg-blue-500' : 'hover:bg-gray-700'
+            }`}
+          >
+            {item.name}
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
+};
+
+export default Sidebar;
+
+
+
+// components/CardSection.js
+import React from 'react';
+
+const CardSection = ({ cards }) => {
+  return (
+    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {cards.map((card) => (
+        <div key={card.id} className="bg-white rounded shadow p-4">
+          <h3 className="text-lg font-semibold">{card.title}</h3>
+          <p className="text-gray-600">{card.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default CardSection;
+// pages/LandingPage.js
+import React, { useState } from 'react';
+import Sidebar from '../components/Sidebar';
+import CardSection from '../components/CardSection';
+
+const navItems = [
+  { id: 'cats', name: 'Cats' },
+  { id: 'dogs', name: 'Dogs' },
+  { id: 'birds', name: 'Birds' },
+  { id: 'rabbits', name: 'Rabbits' },
+];
+
+const cardData = {
+  cats: [
+    { id: 1, title: 'Persian Cat', description: 'Long-haired and fluffy.' },
+    { id: 2, title: 'Siamese Cat', description: 'Vocal and affectionate.' },
+  ],
+  dogs: [
+    { id: 3, title: 'Labrador', description: 'Friendly and outgoing.' },
+    { id: 4, title: 'German Shepherd', description: 'Loyal and intelligent.' },
+  ],
+  birds: [
+    { id: 5, title: 'Parrot', description: 'Colorful and talkative.' },
+    { id: 6, title: 'Sparrow', description: 'Small and chirpy.' },
+  ],
+  rabbits: [
+    { id: 7, title: 'Angora Rabbit', description: 'Fluffy and calm.' },
+    { id: 8, title: 'Lionhead Rabbit', description: 'Has a mane-like fur.' },
+  ],
+};
+
+const LandingPage = () => {
+  const [activeNav, setActiveNav] = useState('cats');
+
+  return (
+    <div className="flex">
+      <Sidebar navItems={navItems} onNavClick={setActiveNav} activeNav={activeNav} />
+      <main className="flex-1 bg-gray-100 min-h-screen">
+        <h1 className="text-2xl font-bold p-6">Our Lovely {activeNav.charAt(0).toUpperCase() + activeNav.slice(1)}</h1>
+        <CardSection cards={cardData[activeNav]} />
+      </main>
+    </div>
+  );
+};
+
+export default LandingPage;
+
+
+<div className="flex w-[390px] max-w-full items-center gap-5 text-sm text-[#050505] font-normal whitespace-nowrap text-center tracking-[-0.14px] mt-[19px]">
+  {highlightsData.map((item) => (
+    <div key={item.id} className="self-stretch flex flex-col items-center w-[82px] my-auto">
+      <img
+        src={item.HighlightImg}
+        alt={item.title}
+        className="aspect-[1] object-contain w-[83px]"
+      />
+      <div className="text-[#050505] mt-1">{item.title}</div>
+    </div>
+  ))}
+</div>
+
+
