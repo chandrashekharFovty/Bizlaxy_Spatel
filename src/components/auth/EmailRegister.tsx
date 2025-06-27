@@ -121,9 +121,10 @@ const EmailRegister = () => {
                         }`}
                       />
                     </div>
-                      {errors.email && (
+                      {errors.email ? (
                   <p className="inputBoxError">{errors.email}</p>
-                )}
+                ) : (
+                      <p className="inputBoxError">{showError}{showSuccess}</p>)}
                   </div>
 
                   <div className="">

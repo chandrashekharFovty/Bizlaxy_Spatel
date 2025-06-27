@@ -1,4 +1,255 @@
 import React, { useState } from "react";
+import ProfileGallery from "./ProfileGallery";
+
+// Sample gallery items
+const postgalleryItems = [
+  {
+    id: "1",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/c286384ab9a94f6ae63dddaf2109347578dc9fa7?placeholderIfAbsent=true",
+  },
+  {
+    id: "2",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/215def76e11b54522b5f2ccb29cfa4f5dc529575?placeholderIfAbsent=true",
+  },
+  {
+    id: "3",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/60ac0ced6ed1b523e975126699b3b75ffc79d062?placeholderIfAbsent=true",
+  },
+  {
+    id: "4",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/96687f4430bb048dcaed31fd494fd3f319acc078?placeholderIfAbsent=true",
+  },
+  {
+    id: "5",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "6",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "7",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "8",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/349d0a7e73189f2186de6ab524fda161e2ea2e0d?placeholderIfAbsent=true",
+  },
+  {
+    id: "9",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/1e7b1a459b8534a84114f833bc76783b8cb7df3a?placeholderIfAbsent=true",
+  },
+  {
+    id: "10",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "11",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "12",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+];
+const eduvidgalleryItems = [
+  {
+    id: "1",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "2",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "3",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "4",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "5",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "6",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "7",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "8",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/349d0a7e73189f2186de6ab524fda161e2ea2e0d?placeholderIfAbsent=true",
+  },
+  {
+    id: "9",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/1e7b1a459b8534a84114f833bc76783b8cb7df3a?placeholderIfAbsent=true",
+  },
+  {
+    id: "10",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "11",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "12",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+];
+const pitchgalleryItems = [
+  {
+    id: "1",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/60ac0ced6ed1b523e975126699b3b75ffc79d062?placeholderIfAbsent=true",
+  },
+  {
+    id: "2",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/60ac0ced6ed1b523e975126699b3b75ffc79d062?placeholderIfAbsent=true",
+  },
+  {
+    id: "3",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/60ac0ced6ed1b523e975126699b3b75ffc79d062?placeholderIfAbsent=true",
+  },
+  {
+    id: "4",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/60ac0ced6ed1b523e975126699b3b75ffc79d062?placeholderIfAbsent=true",
+  },
+  {
+    id: "5",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "6",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "7",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "8",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/349d0a7e73189f2186de6ab524fda161e2ea2e0d?placeholderIfAbsent=true",
+  },
+  {
+    id: "9",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/1e7b1a459b8534a84114f833bc76783b8cb7df3a?placeholderIfAbsent=true",
+  },
+  {
+    id: "10",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "11",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "12",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+];
+const shopgalleryItems = [
+  {
+    id: "1",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "2",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "3",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "4",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/3cce3ea5bd280ad35322625e6ab9d5bb70d53a5b?placeholderIfAbsent=true",
+  },
+  {
+    id: "5",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/1e7b1a459b8534a84114f833bc76783b8cb7df3a?placeholderIfAbsent=true",
+  },
+  {
+    id: "6",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "7",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+  {
+    id: "8",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/349d0a7e73189f2186de6ab524fda161e2ea2e0d?placeholderIfAbsent=true",
+  },
+  {
+    id: "9",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/1e7b1a459b8534a84114f833bc76783b8cb7df3a?placeholderIfAbsent=true",
+  },
+  {
+    id: "10",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "11",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/702238110537ce44f87808f2771a5c6d38b32a8e?placeholderIfAbsent=true",
+  },
+  {
+    id: "12",
+    imageUrl:
+      "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/2e38cb955f8f2ccb06020da42c8984342a22a98f?placeholderIfAbsent=true",
+  },
+];
 
 type TabType = "post" | "eduvid" | "pitch" | "shop";
 
@@ -7,9 +258,9 @@ interface ProfileTabsProps {
   onTabChange?: (tab: TabType) => void;
 }
 
-const ProfileTabs: React.FC<ProfileTabsProps> = ({ 
-  defaultTab = "post", 
-  onTabChange 
+const ProfileTabs: React.FC<ProfileTabsProps> = ({
+  defaultTab = "post",
+  onTabChange,
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>(defaultTab);
 
@@ -21,74 +272,148 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({
   };
 
   return (
-    <div className="dark:bg-gray-800 dark:text-white mt-[30px] max-md:max-w-full z-10">
-      <div className=" justify-center items-stretch flex min-h-[57px] w-full flex-col bg-white border-y-[1.194px] border-y-[#E8E8E8] border-solid max-md:max-w-full">
-        <div className="dark:bg-gray-800 dark:text-white flex w-full items-center justify-center flex-1 flex-wrap h-full max-md:max-w-full">
-          <button 
-            className="self-stretch flex w-60 md:w-[120px] flex-col items-stretch justify-center flex-1 shrink basis-[0%] my-auto"
-            onClick={() => handleTabChange("post")}
-          >
-            <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
-              <div className="flex w-full flex-col items-stretch justify-center flex-1">
-                <div className="flex w-full flex-col items-stretch justify-center flex-1 pt-[19px]">
-                  <div className={` dark:bg-gray-800 dark:text-white self-center text-base font-semibold whitespace-nowrap text-center uppercase tracking-[0.3px] leading-loose flex-1 ${activeTab === "post" ? "text-[#1C4BC4]" : "text-[#3c3c43]"}`}>
-                    Post
-                  </div>
-                  <div className={`flex min-h-0.5 w-full gap-3 mt-3 py-px ${activeTab === "post" ? "bg-[#1C4BC4]" : "bg-transparent"}`}>
-                    <div className="flex min-h-0 w-6" />
+    <>
+      <div className="dark:bg-gray-800 dark:text-white mt-[30px] max-md:max-w-full z-10">
+        <div className=" justify-center items-stretch flex min-h-[57px] w-full flex-col bg-white border-y-[1.194px] border-y-[#E8E8E8] border-solid max-md:max-w-full">
+          <div className="dark:bg-gray-800 dark:text-white flex w-full items-center justify-center flex-1 flex-wrap h-full max-md:max-w-full">
+            <button
+              className="self-stretch flex w-60 md:w-[120px] flex-col items-stretch justify-center flex-1 shrink basis-[0%] my-auto"
+              onClick={() => handleTabChange("post")}
+            >
+              <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
+                <div className="flex w-full flex-col items-stretch justify-center flex-1">
+                  <div className="w-full flex-1 pt-[19px]">
+                    <div
+                      className={`w-full flex-1 ${
+                        activeTab === "post"
+                          ? "text-[#1C4BC4] dark:bg-white dark:text-gray-800"
+                          : "dark:bg-gray-800 dark:text-white text-[#3c3c43]"
+                      }`}
+                    >
+                      Post
+                    </div>
+                    <div
+                      className={`flex min-h-0.5 w-full gap-3 mt-3 ${
+                        activeTab === "post"
+                          ? "bg-[#1C4BC4] dark:bg-white"
+                          : "bg-transparent"
+                      }`}
+                    />
                   </div>
                 </div>
               </div>
-            </div>
-          </button>
-          <button 
-            className="self-stretch flex w-60 md:w-[120px] flex-col items-center text-base font-medium whitespace-nowrap text-center tracking-[0.3px] leading-loose flex-1 shrink basis-[0%] my-auto"
-            onClick={() => handleTabChange("eduvid")}
-          >
-            <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
-              <div className="flex w-full flex-col items-stretch justify-center flex-1">
-                <div className="w-full flex-1 pt-[19px]">
-                  <div className={` dark:bg-gray-800 dark:text-white w-full flex-1 ${activeTab === "eduvid" ? "text-[#1C4BC4]" : "text-[#3c3c43]"}`}>
-                    EDUVID
+            </button>
+            <button
+              className="self-stretch flex w-60 md:w-[120px] flex-col items-stretch justify-center flex-1 shrink basis-[0%] my-auto"
+              onClick={() => handleTabChange("eduvid")}
+            >
+              <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
+                <div className="flex w-full flex-col items-stretch justify-center flex-1">
+                  <div className="w-full flex-1 pt-[19px]">
+                    <div
+                      className={`w-full flex-1 ${
+                        activeTab === "eduvid"
+                          ? "text-[#1C4BC4] dark:bg-white dark:text-gray-800"
+                          : "dark:bg-gray-800 dark:text-white text-[#3c3c43]"
+                      }`}
+                    >
+                      EDUVID
+                    </div>
+                    <div
+                      className={`flex min-h-0.5 w-full gap-3 mt-3 ${
+                        activeTab === "eduvid"
+                          ? "bg-[#1C4BC4] dark:bg-white"
+                          : "bg-transparent"
+                      }`}
+                    />
                   </div>
-                  <div className={`flex min-h-0.5 w-full gap-3 mt-3 ${activeTab === "eduvid" ? "bg-[#1C4BC4]" : "bg-transparent"}`} />
                 </div>
               </div>
-            </div>
-          </button>
-          <button 
-            className="self-stretch flex min-w-60 md:w-[120px] flex-col items-center text-base font-medium whitespace-nowrap text-center tracking-[0.3px] leading-loose flex-1 shrink basis-[0%] my-auto"
-            onClick={() => handleTabChange("pitch")}
-          >
-            <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
-              <div className="flex w-full flex-col items-stretch justify-center flex-1">
-                <div className="w-full flex-1 pt-[19px]">
-                  <div className={`dark:bg-gray-800 dark:text-white w-full flex-1 ${activeTab === "pitch" ? "text-[#1C4BC4]" : "text-[#3c3c43]"}`}>
-                    PITCH
+            </button>
+            <button
+              className="self-stretch flex w-60 md:w-[120px] flex-col items-stretch justify-center flex-1 shrink basis-[0%] my-auto"
+              onClick={() => handleTabChange("pitch")}
+            >
+              <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
+                <div className="flex w-full flex-col items-stretch justify-center flex-1">
+                  <div className="w-full flex-1 pt-[19px]">
+                    <div
+                      className={`w-full flex-1 ${
+                        activeTab === "pitch"
+                          ? "text-[#1C4BC4] dark:bg-white dark:text-gray-800"
+                          : "dark:bg-gray-800 dark:text-white text-[#3c3c43]"
+                      }`}
+                    >
+                      PITCH
+                    </div>
+                    <div
+                      className={`flex min-h-0.5 w-full gap-3 mt-3 ${
+                        activeTab === "pitch"
+                          ? "bg-[#1C4BC4] dark:bg-white"
+                          : "bg-transparent"
+                      }`}
+                    />
                   </div>
-                  <div className={`flex min-h-0.5 w-full gap-3 mt-3 ${activeTab === "pitch" ? "bg-[#1C4BC4]" : "bg-transparent"}`} />
                 </div>
               </div>
-            </div>
-          </button>
-          <button 
-            className="self-stretch flex min-w-60 md:w-[120px] flex-col items-center text-base font-medium whitespace-nowrap text-center tracking-[0.3px] leading-none flex-1 shrink basis-[0%] my-auto"
-            onClick={() => handleTabChange("shop")}
-          >
-            <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
-              <div className="flex w-full flex-col items-stretch justify-center flex-1">
-                <div className="w-full flex-1 pt-[19px]">
-                  <div className={`dark:bg-gray-800 dark:text-white w-full flex-1 ${activeTab === "shop" ? "text-[#1C4BC4]" : "text-[#3c3c43]"}`}>
-                    SHOP
+            </button>
+            <button
+              className="self-stretch flex w-60 md:w-[120px] flex-col items-stretch justify-center flex-1 shrink basis-[0%] my-auto "
+              onClick={() => handleTabChange("shop")}
+            >
+              <div className="flex min-h-[60px] w-full flex-col overflow-hidden items-stretch justify-center">
+                <div className="flex w-full flex-col items-stretch justify-center flex-1">
+                  <div className="w-full flex-1 pt-[19px]">
+                    <div
+                      className={`w-full flex-1 ${
+                        activeTab === "shop"
+                          ? "text-[#1C4BC4] dark:bg-white dark:text-gray-800"
+                          : "dark:bg-gray-800 dark:text-white text-[#3c3c43]"
+                      }`}
+                    >
+                      SHOP
+                    </div>
+                    <div
+                      className={`flex min-h-0.5 w-full gap-3 mt-3 ${
+                        activeTab === "shop"
+                          ? "bg-[#1C4BC4] dark:bg-white"
+                          : "bg-transparent"
+                      }`}
+                    />
                   </div>
-                  <div className={`flex min-h-0.5 w-full gap-3 mt-3 ${activeTab === "shop" ? "bg-[#1C4BC4]" : "bg-transparent"}`} />
                 </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      <div className="flex flex-col items-stretch justify-center w-full h-full">
+        {activeTab === "post" && (
+          <div>
+            {" "}
+            <ProfileGallery items={postgalleryItems} />
+          </div>
+        )}
+        {activeTab === "eduvid" && (
+          <div>
+            {" "}
+            <ProfileGallery items={eduvidgalleryItems} />
+          </div>
+        )}
+        {activeTab === "pitch" && (
+          <div>
+            {" "}
+            <ProfileGallery items={pitchgalleryItems} />
+          </div>
+        )}
+        {activeTab === "shop" && (
+          <div>
+            {" "}
+            <ProfileGallery items={shopgalleryItems} />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { SearchInput } from "../ui/SearchInput";
 import { UserAvatar } from "../ui/UserAvatar";
-import { FollowButton } from "../ui/FollowButton";
-import searchGray from "../../../public/searchdark.png";
+
 import {
   Label,
   Listbox,
@@ -11,15 +9,17 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { CheckIcon, ChevronsDownUpIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Transition } from "@headlessui/react";
+import { Fragment } from "react";
+
+type User = { username: string; avatar: string };
+const searchables: User[] = [
+  /* your users */
+];
 
 export function RightSidebar() {
   const searchables = [
-    {
-      username: "Search...",
-      avatar: "https://cdn-icons-png.flaticon.com/128/17216/17216943.png",
-      followsYou: false,
-    },
     {
       username: "MayaCreates",
       avatar:
@@ -129,70 +129,76 @@ export function RightSidebar() {
     "Meta Verified",
   ];
 
-  const [selected, setSelected] = useState(searchables[0]);
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const filtered = query
+    ? searchables.filter((u) =>
+        u.username.toLowerCase().includes(query.toLowerCase())
+      )
+    : [];
 
   return (
     <>
-      <div className=" bg-white  fixed overflow-scroll flex w-[370px] h-[982px] flex-col items-stretch border-[rgb(28, 75, 196, 100)] border-l">
-        <div className="dark:bg-gray-800 dark:text-white fixed top-0 right-0 w-[370px] h-screen scrollbar-hide overflow-y-auto bg-white ml-[40px] flex flex-col items-stretch px-6 ">
-          <Listbox
-            as="div"
-            value={selected}
-            onChange={setSelected}
-            className="w-[324px] h-[40px]  bg-white mt-2 dark:bg-gray-800 dark:text-white"
-          >
-            <Label className=" block text-xl  font-normal w-full"></Label>
-            <div className=" relative mt-2 w-full">
-              <ListboxButton className="dark:bg-gray-800 dark:text-white grid w-full h-[40px] cursor-default grid-cols-1 bg-white text-left rounded-3xl border-[2px] border-solid border-[#a89bfc] font-normal outline-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                <span className="col-start-1 w-full h-full row-start-1 flex items-center gap-3 px-4 py-2">
-                  <img
-                    alt=""
-                    src={selected.avatar}
-                    className="drark:text-white size-5 shrink-0 rounded-full"
-                  />
-                  <span className="block truncate">{selected.username}</span>
-                </span>
-                <ChevronsDownUpIcon
-                  aria-hidden="true"
-                  className="col-start-1 dark:text-gray-800 row-start-1 size-5 self-center justify-self-end text-white sm:size-4"
-                />
-              </ListboxButton>
-
-              <ListboxOptions
-                transition
-                className="absolute w-full h-auto z-10 mt-1 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-2 ring-[#a89bfc] focus:outline-[#a89bfc] data-leave:transition data-leave:duration-100 data-leave:ease-in data-closed:data-leave:opacity-0 sm:text-sm"
+      <div className=" bg-white fixed overflow-hidden flex w-[370px] h-[982px] flex-col items-stretch border-[rgb(28, 75, 196, 100)] border-l">
+        <div className="dark:bg-gray-800 overflow-hidden dark:text-white fixed w-[370px] h-screen scrollbar-hide bg-white flex flex-col items-stretch px-3">
+          <div style={{ position: "relative", width: 300 }} className="mt-8 dark:bg-gray-800 dark:text-white grid w-[370px] h-[40px] cursor-default grid-cols-1 bg-white text-left rounded-3xl border-[2px] border-solid border-[#a89bfc] font-normal outline-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+            <input
+              type="text"
+              placeholder="Search users..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              style={{ width: "100%", padding: 8, boxSizing: "border-box" }}
+              className="w-[95%] h-full bg-transparent outline-none"
+            />
+            {filtered.length > 0 && (
+              <ul
+                style={{
+                  position: "absolute",
+                  top: 38,
+                  left: 0,
+                  right: 0,
+                  background: "#fff",
+                  listStyle: "none",
+                  margin: 0,
+                  marginTop: 5,
+                  padding: 0,
+                  maxHeight: 200,
+                  overflowY: "auto",
+                  zIndex: 10,
+                }} className="dark:bg-gray-800 dark:text-white bg-white text-black border border-[#a89bfc] rounded-xl shadow-lg"
               >
-                {searchables.map((person, index) => (
-                  <ListboxOption
-                    key={index}
-                    value={person}
-                    className=" group relative cursor-default pl-3 select-none data-focus:bg-indigo-600 data-focus:text-white outline-none"
+                {filtered.map((user) => (
+                  <li
+                    key={user.username}
+                    onClick={() => {
+                      navigate(`/profile/${user.username}`);
+                      setQuery("");
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: 8,
+                      cursor: "pointer",
+                    }}
                   >
-                    <div className="flex items-center">
-                      <img
-                        alt=""
-                        src={person.avatar}
-                        className="size-5 shrink-0 rounded-full"
-                      />
-                      <span className="ml-3 block truncate font-normal group-data-selected:font-semibold">
-                        {person.username}
-                      </span>
-                    </div>
-                    <div className="overflow-hidden text-left text-[11px] text-[rgba(142,142,142,1)] font-normal leading-none pr-[3px] pl-8 py-1">
-                      {person.followsYou
-                        ? "Follows you"
-                        : `Followed by ${person.followedBy}`}
-                    </div>
-
-                    {/* <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-white group-not-data-selected:hidden group-data-focus:text-white">
-                          <CheckIcon aria-hidden="true" className="size-5" />
-                        </span> */}
-                  </ListboxOption>
+                    <img
+                      src={user.avatar}
+                      alt=""
+                      style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: "50%",
+                        marginRight: 8,
+                      }}
+                    />
+                    {user.username}
+                  </li>
                 ))}
-              </ListboxOptions>
-            </div>
-          </Listbox>
+              </ul>
+            )}
+          </div>
+
           <div className="flex items-stretch whitespace-nowrap w-[370px] h-[56px]  mt-8">
             <div className="w-full h-full flex items-center text-sm text-[rgba(5,5,5,1)] font-bold tracking-[-0.14px] grow shrink basis-auto">
               <Link to="/profile">
@@ -305,20 +311,8 @@ export function RightSidebar() {
           </div>
 
           <div className="mb-[-25px] text-[11px] text-[rgba(199,199,199,1)] font-normal mt-3 pb-[39px] max-md:mb-2.5 max-md:mx-[5px]">
-            <div className="w-full max-w-[319px] flex-1 pr-1.5">
-              <div className="flex w-full items-stretch text-[11px] leading-none flex-wrap">
-                {footerLinks.map((link, index) => (
-                  <div
-                    key={index}
-                    className="pr-1 py-px text-[11px] leading-none"
-                  >
-                    {link} {index < footerLinks.length - 1 ? "·" : ""}
-                  </div>
-                ))}
-              </div>
-            </div>
             <div className="text-[11px] leading-none uppercase mt-5">
-              © 2025 BIZLAXY
+              all rights reserved © 2025 BIZLAXY
             </div>
           </div>
         </div>

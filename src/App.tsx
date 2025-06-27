@@ -94,7 +94,7 @@ const appRouter = createBrowserRouter([
   { path: "/profile", element: <PrivateRoute><ProfilePager /></PrivateRoute> },
   { path: "/editprofile", element: <PrivateRoute><Editprofile /></PrivateRoute> },
   { path: "/investerprofile", element: <PrivateRoute><InvesterProfile /></PrivateRoute> },
-  { path: "/infoprofile", element: <PrivateRoute><InfoProfile /></PrivateRoute> },
+  { path: "/infoprofile", element: <PrivateRoute><InfoProfile/></PrivateRoute> },
 
   // 404
   { path: "/*", element: <NotFound /> },

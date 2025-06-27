@@ -77,7 +77,15 @@ const EmailOtpPage = () => {
   //     // console.log(showError);
   //   }
   // }, [showSuccess, showError]);
-
+//hasshed Email show in the otp page
+  function maskGmail (){
+    const email = "0810chandrashekhar@gmail.com"; // Replace with the actual email from sessionStorage or props
+    // const email = sessionStorage.getItem("email");
+    if (!email) return "";
+    const [localPart, domain] = email.split("@");
+    const maskedLocalPart = localPart.slice(0, 2) + "********";
+    return `${maskedLocalPart}@${domain}`;
+  }
   return (
     <>
       <div className="custom-bg max-w-screen max-h-screen w-full h-full flex justify-center items-center relative">
@@ -97,7 +105,7 @@ const EmailOtpPage = () => {
                 </p>
                 <p className="text-sm font-normal mt-1 tracking-[0.2px]">
                   6 digit Otp sent to your email <br />
-                  <span className="font-medium"> z********@gmail.com</span>
+                  <span className="font-medium"> {maskGmail()}</span>
                 </p>
               </div>
               <div className="w-full mt-5">
@@ -121,7 +129,8 @@ const EmailOtpPage = () => {
                         />
                       ))}
                     </div>
-                    {error && <p className="inputBoxError">{error}</p>}
+                    {error ? (<p className="inputBoxError">{error}</p>): (
+                      <p className="inputBoxError">{showError}{showSuccess}</p>)}
                   </div>
                   <div className="">
                     <div className="">

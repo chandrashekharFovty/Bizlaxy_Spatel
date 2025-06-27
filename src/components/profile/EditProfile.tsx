@@ -213,3 +213,24 @@ const Editprofile: React.FC<EditprofileProps> = ({
 };
 
 export default Editprofile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

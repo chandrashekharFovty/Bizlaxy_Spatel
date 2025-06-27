@@ -18,7 +18,7 @@ const StoryPopover = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="dark:text-black relative">
       <MoreHorizontal
         onClick={() => setOpen(!open)}
         className="cursor-pointer justify-end text-white"

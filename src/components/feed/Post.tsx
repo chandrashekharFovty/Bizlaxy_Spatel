@@ -9,6 +9,8 @@ import { LuHeart } from "react-icons/lu";
 import { FaRegComment } from "react-icons/fa6";
 import { FiSend } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
+import { HiDocument } from "react-icons/hi2";
+import { CgFileDocument } from "react-icons/cg";
 
 const images = ["/poster03.png", "/poster01.png", "/poster02.png"];
 
@@ -60,6 +62,8 @@ export function Post({
   const [postComment, setPostComment] = useState<string[]>([]);
   const [showShareUsers, setShowShareUsers] = useState(false);
 const [sharedUsers, setSharedUsers] = useState<string[]>([]);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
 
   const handleLike = () => {
     if (!isLiked) {
@@ -97,6 +101,11 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
   const prevSlide = () =>
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
+   const truncatedDescription =
+    content.description.length > content.descpLimit
+      ? content.description.slice(0, content.descpLimit)
+      : content.description;
+
   return (
    <>
     <div className="dark:border-x dark:border-gray-300 dark:glass-bg-dark dark:bg-gray-800 dark:text-white bg-white shadow p-5 rounded-xl w-full relative z-10">
@@ -108,7 +117,7 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
               <span className="font-medium text-base">{user.name}</span>
               {showMoreOptions && (
                 <img
-                  src="https://cdn.builder.io/api/v1/image/assets/..."
+                  src="https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/9e55e48d50c24f504973bb6ca3fab7e2ea80bba0?placeholderIfAbsent=true"
                   className="w-5"
                 />
               )}
@@ -133,8 +142,16 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
       <div className="text-sm mt-2.5 w-full">
         <div className="w-[660px]">
           <div className="font-semibold">{content.title}</div>
-          <div className="dark:text-gray-400 text-gray-600 font-normal mt-2">
-            {content.description}
+            <div className="dark:text-white text-[#464646] font-normal mt-2">
+            {showFullDescription ? content.description : truncatedDescription}
+            {content.description.length > content.descpLimit && (
+              <button
+                onClick={() => setShowFullDescription(!showFullDescription)}
+                className="text-blue-400 text-[12px] ml-1 hover:underline"
+              >
+                {showFullDescription ? "..." : "..."}
+              </button>
+            )}
           </div>
 
           {isMediaContent && (
@@ -204,8 +221,10 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
           </div>
         </div>
 
-        <div className="cursor-pointer flex ">
+        <div className="cursor-pointer flex gap-2">
+           < CgFileDocument className="text-2xl mt-1"/>
           <SavePostBadge type="savePost" />
+         
         </div>
       </div>
     </div>

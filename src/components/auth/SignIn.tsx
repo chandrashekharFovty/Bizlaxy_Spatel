@@ -127,10 +127,9 @@ const LogIn = () => {
                     errors.username ? "invalidInputBox" : "validInputBox"
                   }`}
                 />
-                {errors.username && (
-                  <p className="inputBoxError">{errors.username}</p>
-                )}
-              </div>
+                {errors.username ? (
+                  <p className="inputBoxError">{errors.username}</p>) : <p className="inputBoxError">{showError}{showSuccess}</p>} 
+                  </div>
               {/* Password Field */}
               <div className="h-[80px]">
                 <label
@@ -166,9 +165,9 @@ const LogIn = () => {
                       />
                     </PasswordToggleField.Toggle>
                   </div>
-                  {errors.password && (
-                    <p className="inputBoxError">{errors.password}</p>
-                  )}
+                  {errors.password ? 
+                  (<p className="inputBoxError">{errors.username}</p>) : (<p className="inputBoxError">{showError}{showSuccess}</p>)
+                  }
                 </PasswordToggleField.Root>
               </div>
 

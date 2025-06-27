@@ -49,7 +49,7 @@ const OtpPage = () => {
     e.preventDefault();
     const fullOtp = otp.join("");
     if (fullOtp.length < 6 || otp.includes("")) {
-      setError ? "Please enter a valid 6-digit OTP" : showError;
+      setError("Please enter a valid 6-digit OTP");
       formRef.current.classList.remove("animationsubmit");
       void formRef.current.offsetWidth;
       formRef.current.classList.add("animationsubmit");
@@ -60,7 +60,6 @@ const OtpPage = () => {
     setError(""); 
     const numericOtp = parseInt(fullOtp);   
     const updatedOtp = { ...fullotps, otp: numericOtp };
-    console.log("Numeric:", numericOtp);
     console.log("Otp:", updatedOtp);
     wrap(async () => {
       // simulate async call
@@ -84,6 +83,14 @@ const OtpPage = () => {
   //   }
   // }, [showSuccess, showError]);
 
+  //hasshed phone number show in the otp page
+  function maskPhonenumber (){
+    const mobile = fullotps.mobile;
+    if (mobile && mobile.length >= 10) {
+      return `${mobile.slice(0, 3)}****${mobile.slice(-3)}`;
+    }
+    return mobile;
+  }
   return (
     <>
       <div className="custom-bg max-w-screen max-h-screen w-full h-full flex justify-center items-center relative">
@@ -103,7 +110,7 @@ const OtpPage = () => {
                 <p className="text-base font-normal">
                   6 digit Otp sent to your mobile
                   <br />
-                  <span className="font-medium">+91-989****899</span>
+                  <span className="font-medium">{maskPhonenumber()}</span>
                 </p>
               </div>
               <div className="w-full mt-5">
@@ -128,7 +135,8 @@ const OtpPage = () => {
                       />
                     ))}
                   </div>
-                  {error ? <p className="inputBoxError">{error}</p> : showSuccess}
+                  {error ? (<p className="inputBoxError">{error}</p>) : (
+                      <p className="inputBoxError">{showError}{showSuccess}</p>)}
                   <div className="">
                     <div className="">
                       <button

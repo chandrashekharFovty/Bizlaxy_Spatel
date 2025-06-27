@@ -104,7 +104,7 @@ export function PostList() {
     // },
   ];
 
-  const posts = [
+   const posts = [
     {
       user: {
         name: "Brian Turner",
@@ -116,7 +116,7 @@ export function PostList() {
         title: "This is a ver ull description of the post.",
         titleLimit: 30, // 🔹 Set title character limit here
         description:
-          "This is the full description of the post. It can be very long, but you can",
+          "“From a spark of an idea to building something real — every step, sprint, and setback has shaped this journey. Here’s to the sleepless nights, early wins, and relentless belief in something greater. 🔗 #FounderLife #StartupJourney",
         descpLimit: 50, // 🔹 Set description character limit here
       },
       engagement: {
@@ -140,7 +140,7 @@ export function PostList() {
         title: "This is a ver ull description of the post.",
         titleLimit: 30, // 🔹 Set title character limit here
         description:
-          "This is the full description of the post. It can be very long, but you can",
+          "Dream big. Hustle hard. Repeat. Pioneering new paths in [your industry] and proving that ambition paired with action wins every time. 🚀 #Innovate #BusinessGoals",
         descpLimit: 50, // 🔹 Set description character limit here
       },
       engagement: {
@@ -162,7 +162,7 @@ export function PostList() {
         title: "This is a ver ull description of the post.",
         titleLimit: 30, // 🔹 Set title character limit here
         description:
-          "This is the full description of the post. It can be very long, but you can",
+          "Not just polished pitches — here’s the real side of startup life: late-night brainstorms, coffee-fueled sprints, and team huddles that make the dream possible. What’s the hustle behind your best idea? 👇 #StartupVibes #TeamWork",
         descpLimit: 50, // 🔹 Set description character limit here
       },
       engagement: {
@@ -184,7 +184,7 @@ export function PostList() {
         title: "This is a ver ull description of the post.",
         titleLimit: 30, // 🔹 Set title character limit here
         description:
-          "This is the full description of the post. It can be very long, but you can",
+          "Passion turned into purpose — but I need your voice: Whats the #1 challenge you face when launching a new idea? Lets chat in the comments & build solutions together. 💬👇 #GrowthMindset #EntrepreneurshipInspired by engaging caption tips like asking questions and CTAs",
         descpLimit: 50, // 🔹 Set description character limit here
       },
       engagement: {
@@ -229,7 +229,7 @@ export function PostList() {
   }
 
   return (
-  <div className="grow mt-12 max-md:mt-10  max-md:px-4 z-10 pb-8 ml-12">
+  <div className="grow mt-6 max-md:mt-10  max-md:px-4 z-10 pb-8 ml-12">
   <div className="flex flex-col h-full mt-2 items-center gap-6 w-full">
     <Story items={storyItems} />
 

@@ -28,8 +28,8 @@ const useHandleSubmit = () => {
         console.log(response.data.message);
       }
     } catch (error) {
-      setShowError(error || 'An error occurred.');
-        console.log(error|| 'An error occurred.');
+      setShowError(error.response.data.message || error || 'An error occurred.');
+        // console.log(error|| 'An error occurred.');
         console.log("Error:", error);
         
     }
