@@ -1,73 +1,46 @@
-# Welcome to your Lovable project
+# 📦 Bizlaxy
 
+# Welcome to your Lovable project
 ## Project info
 
-**URL**: https://lovable.dev/projects/c5c475a4-dd51-4afb-8a04-2707c35e8118
+**Full‑stack MERN application** built with React (frontend) and Node.js + Express + MongoDB (backend).
 
-## How can I edit this code?
+## 👨‍💻 Developers
 
-There are several ways of editing your application.
+- **Frontend**  
+  - @chandrashekharGhosh (Chandrashekhar Ghosh)  
+  - @shivaniPatel (Shivani Patel)
 
-**Use Lovable**
+- **Backend**  
+  - @piyushBarve (Piyush Barve)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c5c475a4-dd51-4afb-8a04-2707c35e8118) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🚀 Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Frontend:** React (created with Create React App)  
+- **Backend:** Node.js, Express  
+- **Database:** MongoDB (via Mongoose ODM)  
+- **API Communication:** Axios (frontend → backend)  
+- **Other Tools:**  
+  - `concurrently` to run both frontend & backend  
+  - `dotenv` for environment variables  
+  - `cors` for handling Cross-Origin requests  
+  - `nodemon` (dev) for server reloads
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Much like established MERN templates, this uses separate `client/` and `server/` folders and is designed for easy deployment :contentReference[oaicite:1]{index=1}.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 📥 Download & Run
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. **Download ZIP**  
+   Clone repo or download ZIP and extract.
 
-# Step 3: Install the necessary dependencies.
-npm i
+2. **Install & Run**  
+   Open a terminal at the project's root and run:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/c5c475a4-dd51-4afb-8a04-2707c35e8118) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+   ```bash
+   npm install
+   npm run start
