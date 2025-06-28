@@ -1,6 +1,6 @@
 # 📦 Bizlaxy
 
-# Welcome to your Lovable project
+# Welcome to your Bizlaxy project
 ## Project info
 
 **Full‑stack MERN application** built with React (frontend) and Node.js + Express + MongoDB (backend).
