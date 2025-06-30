@@ -147,19 +147,16 @@ const CompanyForm: React.FC = () => {
   >([]);
 
   const handleOnbusinesschange = (val) => {
-    setSelectedBusinessTypes(val);
     setbusinessvalue(val);
     handleChange(val);
     handleBlur(val);
   };
   const handleOnindustrychange = (val) => {
-    setSelectedIndustries(val);
     setindustryvalue(val);
     handleChange(val);
     handleBlur(val);
   };
   const handleOnbusinessModelchange = (val) => {
-    setSelectedBusinessModels(val);
     setvaluebusinessModel(val);
     handleChange(val);
     handleBlur(val);
@@ -268,44 +265,43 @@ const CompanyForm: React.FC = () => {
 
   return (
     <>
-      <div className="w-full h-auto">
-        <div className="fixed w-full flex gap-1">
-          {progressbarArray.map((_, index) => (
+      <div className="w-full h-[8px] mt-5 mb-5 flex gap-1">
+        {progressbarArray.map((_, index) => (
+          <div
+            className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"
+            key={index}
+          >
             <div
-              className="w-[5.8%] bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-indigo-200"
-              key={index}
-            >
-              <div
-                className={`btn-gradient h-2.5 rounded-full dark:bg-indigo-500 ${
-                  index < progress ? "w-full" : "w-0"
-                }`}
-              ></div>
+              className={`bg-indigo-600 h-2.5 rounded-full dark:bg-indigo-500 ${
+                index < progress ? "w-full" : "w-0"
+              }`}
+            ></div>
+          </div>
+        ))}
+      </div>
+
+      <form
+        onSubmit={onSubmit}
+        encType="multipart/form-data"
+        className="w-full flex flex-col gap-6"
+      >
+        {/* Company Name */}
+        <div className="w-full min-w-[952px] flex flex-col mx-auto">
+          <label className="text-sm font-medium">Company Name</label>
+          <input
+            name="companyName"
+            value={form.companyName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="Enter your company name here"
+            className="w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+          />
+          {errors.companyName && (
+            <div className="text-red-500 text-sm mt-1">
+              {errors.companyName}
             </div>
-          ))}
+          )}
         </div>
-        <form
-          onSubmit={onSubmit}
-          encType="multipart/form-data"
-          className="w-full overflow-scroll scrollbar-hide mt-[11%] h-[600px] flex flex-col gap-5 z-10"
-        >
-          <div className="w-[97%] overflow-scroll scrollbar-hide mt-[3%] h-[600px] flex flex-col gap-5 z-10">
-            {/* Company Name */}
-            <div className="w-full  flex flex-col mx-auto">
-              <label className="text-sm font-medium">Company Name</label>
-              <input
-                name="companyName"
-                value={form.companyName}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="Enter your company name here"
-                className="w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-              />
-              {errors.companyName && (
-                <div className="text-red-500 text-sm mt-1">
-                  {errors.companyName}
-                </div>
-              )}
-            </div>
 
             {/* Business Type */}
             <div className="w-full  flex flex-col mx-auto">
@@ -366,125 +362,116 @@ const CompanyForm: React.FC = () => {
                 />
               </div>
 
-              {errors.businessModel && (
-                <div className="text-red-500 text-sm mt-1">
-                  {errors.businessModel}
-                </div>
-              )}
+          {errors.businessModel && (
+            <div className="text-red-500 text-sm mt-1">
+              {errors.businessModel}
             </div>
-            {/* Stage */}
-            <div className="w-full flex flex-col mx-auto">
-              <label className="text-sm font-medium">Stage</label>
-              <div className="mt-2 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleStageSelect("Early")}
-                  className={`px-3 py-2 rounded-[6px] w-auto ${
-                    form.companyStage === "Early"
-                      ? "btn-gradient text-white"
-                      : "bg-[#EAF6FF]"
-                  } border border-[#BED6FF] text-sm`}
-                >
-                  Early Stage
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleStageSelect("Growth")}
-                  className={`px-3 py-2 rounded-[6px] w-auto ${
-                    form.companyStage === "Growth"
-                      ? "btn-gradient text-white"
-                      : "bg-[#EAF6FF]"
-                  } border border-[#BED6FF] text-sm`}
-                >
-                  Growth Stage
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleStageSelect("Mature")}
-                  className={`px-3 py-2 rounded-[6px] w-auto ${
-                    form.companyStage === "Mature"
-                      ? "btn-gradient text-white"
-                      : "bg-[#EAF6FF]"
-                  } border border-[#BED6FF] text-sm`}
-                >
-                  Mature Stage
-                </button>
+          )}
+        </div>
+        {/* Stage */}
+        <div className="w-full min-w-[952px] flex flex-col mx-auto">
+          <label className="text-sm font-medium">Stage</label>
+          <div className="mt-2 flex gap-2">
+            <button
+              type="button"
+              onClick={() => handleStageSelect("Early")}
+              className={`px-3 py-2 rounded-[6px] w-auto ${
+                form.companyStage === "Early" ? "bg-[#bce2fd]" : "bg-[#EAF6FF]"
+              } border border-[#BED6FF] text-sm`}
+            >
+              Early Stage
+            </button>
+            <button
+              type="button"
+              onClick={() => handleStageSelect("Growth")}
+              className={`px-3 py-2 rounded-[6px] w-auto ${
+                form.companyStage === "Growth" ? "bg-[#bce2fd]" : "bg-[#EAF6FF]"
+              } border border-[#BED6FF] text-sm`}
+            >
+              Growth Stage
+            </button>
+            <button
+              type="button"
+              onClick={() => handleStageSelect("Mature")}
+              className={`px-3 py-2 rounded-[6px] w-auto ${
+                form.companyStage === "Mature" ? "bg-[#bce2fd]" : "bg-[#EAF6FF]"
+              } border border-[#BED6FF] text-sm`}
+            >
+              Mature Stage
+            </button>
+          </div>
+          {errors.companyStage && (
+            <div className="text-red-500 text-sm mt-1">
+              {errors.companyStage}
+            </div>
+          )}
+        </div>
+        <div className="w-full min-w-[952px] flex flex-col mx-auto">
+        <label className="text-sm font-medium">Amount Required for Funding</label>
+        <div className="w-full h-[46px] flex flex-row justify-between items-center mt-1">
+         {/* Funding Range: Min */}
+          <div className="w-5/12 flex flex-col">
+            <input
+              type="number"
+              name="minFunding"
+              placeholder="Min"
+              value={form.minFunding}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+            />
+            {errors.minFunding && (
+              <div className="text-red-500 text-sm">
+                {errors.minFunding}
               </div>
-              {errors.companyStage && (
-                <div className="text-red-500 text-sm mt-1">
-                  {errors.companyStage}
-                </div>
-              )}
-            </div>
-            <div className="w-full flex flex-col mx-auto">
-              <label className="text-sm font-medium">
-                Amount Required for Funding
-              </label>
-              <div className="w-full h-[46px] flex flex-row justify-between items-center mt-1">
-                {/* Funding Range: Min */}
-                <div className="w-5/12 flex flex-col">
-                  <input
-                    type="number"
-                    name="minFunding"
-                    placeholder="Min"
-                    value={form.minFunding}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-                  />
-                  {errors.minFunding && (
-                    <div className="text-red-500 text-sm">
-                      {errors.minFunding}
-                    </div>
-                  )}
-                </div>
-                <div className="w-1/12 h-[1px] bg-black"></div>
-                {/* Funding Range: Max */}
-                <div className="w-5/12 flex flex-col">
-                  <input
-                    type="number"
-                    name="maxFunding"
-                    placeholder="Max"
-                    value={form.maxFunding}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-                  />
-                  {errors.maxFunding && (
-                    <div className="text-red-500 text-sm">
-                      {errors.maxFunding}
-                    </div>
-                  )}
-                </div>
+            )}
+          </div>
+          <div className="w-1/12 h-[1px] bg-black"></div>
+          {/* Funding Range: Max */}
+          <div className="w-5/12 flex flex-col">
+            <input
+              type="number"
+              name="maxFunding"
+              placeholder="Max"
+              value={form.maxFunding}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+            />
+            {errors.maxFunding && (
+              <div className="text-red-500 text-sm">
+                {errors.maxFunding}
               </div>
-            </div>
-            {/* Country */}
-            <div className="w-full flex flex-col mx-auto">
-              <label className="text-sm font-medium">Country</label>
-              <select
-                name="country"
-                value={form.country}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                aria-label="Country"
-                aria-placeholder="Select Country"
-                className="mt-2 w-full h-[60px] outline-[#BED6FF] placeholder:text-gray-300 border border-[#BED6FF] rounded-xl px-7 text-sm"
-              >
-                <option value="" disabled>
-                  Select Country
-                </option>
-                {Country.getAllCountries().map((c) => (
-                  <option key={c.isoCode} value={c.isoCode}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-              {errors.country && (
-                <div className="text-red-500 text-sm mt-1">
-                  {errors.country}
-                </div>
-              )}
-            </div>
+            )}
+          </div>
+        </div>
+          
+        </div>
+        {/* Country */}
+        <div className="w-full min-w-[952px] flex flex-col mx-auto">
+          <label className="text-sm font-medium">Country</label>
+          <select
+            name="country"
+            value={form.country}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            aria-label="Country"
+            aria-placeholder="Select Country"
+            className="mt-2 w-full h-[60px] outline-[#BED6FF] placeholder:text-gray-300 border border-[#BED6FF] rounded-xl px-7 text-sm"
+          >
+            <option value="" disabled>
+              Select Country
+            </option>
+            {Country.getAllCountries().map((c) => (
+              <option key={c.isoCode} value={c.isoCode}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+          {errors.country && (
+            <div className="text-red-500 text-sm mt-1">{errors.country}</div>
+          )}
+        </div>
 
             {/* State */}
             <div className="w-full  flex flex-col mx-auto">
@@ -534,101 +521,88 @@ const CompanyForm: React.FC = () => {
               )}
             </div>
 
-            {/* Referrals */}
-            <div className="w-full  flex flex-col mx-auto">
-              <fieldset className="w-full h-[60px] flex flex-col gap-2">
-                <legend className="text-sm font-medium mb-2">
-                  How did you hear about us?
-                </legend>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="referrals"
-                    value="Facebook"
-                    checked={form.referrals.includes("Facebook")}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="btn-gradient"
-                  />{" "}
-                  Facebook
-                </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="referrals"
-                    value="Instagram"
-                    checked={form.referrals.includes("Instagram")}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                     className="btn-gradient"
-                  />{" "}
-                  Instagram
-                </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="referrals"
-                    value="YouTube"
-                    checked={form.referrals.includes("YouTube")}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                     className="btn-gradient"
-                  />{" "}
-                  YouTube
-                </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="referrals"
-                    value="Friend"
-                    checked={form.referrals.includes("Friend")}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                     className="btn-gradient"
-                  />{" "}
-                  Friend
-                </label>
-                <label className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="referrals"
-                    value="Others"
-                    checked={form.referrals.includes("Others")}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                     className="btn-gradient"
-                  />{" "}
-                  Others
-                </label>
-              {errors.referrals && (
-                <div className="text-red-500 text-sm mt-1">
-                  {errors.referrals}
-                </div>
-              )}
-              </fieldset>
-            </div>
-          </div>
-        {/* Submit */}
-        <div className="h-8 w-full">
-          <div className="w-[97%] h-full flex justify-end">
-            <button
-              onClick={() => {
-                onSubmit;
-              }}
-              type="submit"
-              disabled={!isValid}
-              className={`w-[122px] h-[51px] rounded-xl font-semibold text-lg ${
-                isValid
-                  ? "btn-gradient text-white"
-                  : "bg-gray-300 text-gray-600 cursor-not-allowed"
-              }`}
-            >
-              Submit
-            </button>
-          </div>
+        {/* Referrals */}
+        <div className="w-full min-w-[952px] flex flex-col mx-auto">
+          <fieldset className="w-full h-[60px] flex flex-col gap-2">
+            <legend className="text-sm font-medium mb-2">
+              How did you hear about us?
+            </legend>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="referrals"
+                value="Facebook"
+                checked={form.referrals.includes("Facebook")}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />{" "}
+              Facebook
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="referrals"
+                value="Instagram"
+                checked={form.referrals.includes("Instagram")}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />{" "}
+              Instagram
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="referrals"
+                value="YouTube"
+                checked={form.referrals.includes("YouTube")}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />{" "}
+              YouTube
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="referrals"
+                value="Friend"
+                checked={form.referrals.includes("Friend")}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />{" "}
+              Friend
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="referrals"
+                value="Others"
+                checked={form.referrals.includes("Others")}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />{" "}
+              Others
+            </label>
+          </fieldset>
+          {errors.referrals && (
+            <div className="text-red-500 text-sm mt-1">{errors.referrals}</div>
+          )}
         </div>
-        </form>
-      </div>
+
+        {/* Submit */}
+        <div className="w-full min-w-[952px] flex justify-end mx-auto mt-4">
+          <button
+            type="submit"
+            disabled={!isValid}
+            className={`w-[122px] h-[51px] rounded-xl font-semibold text-lg ${
+              isValid
+                ? "bg-[#1C4BC4] text-white"
+                : "bg-gray-300 text-gray-600 cursor-not-allowed"
+            }`}
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </>
   );
 };
