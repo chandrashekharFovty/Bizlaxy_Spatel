@@ -28,10 +28,7 @@ const InfoBox = [
 type Props = { userType: UserType };
 
 export default function DynamicForm({ userType }: Props) {
-
   const headings = formHeadConfig[userType] || [];
-
-  
 
   return (
     <div className="flex min-h-screen min-w-screen overflow-x-hidden">
@@ -40,22 +37,24 @@ export default function DynamicForm({ userType }: Props) {
         <InfoCarousel InfoBoxes={InfoBox} />
       </div>
       {/* Right side */}
-      <div className="w-[1012px] mx-auto bg-white h-auto max-w-screen my-[60px] ml-[450px] mr-[50px]">
+      <div className="w-[1012px] max-w-screen bg-white ml-[31%] scrollbar-hide">
         {headings.map((headings: FieldHead) => (
-          <div className="w-[952px] h-[58px] flex flex-col gap-[6px] mx-auto">
-            <h3 className="text-2xl font-bold">{headings.formheading}</h3>
+          <div className="fixed bg-white w-[96%] h-[58px] flex flex-col gap-[6px] z-20">
+            <h3 className="text-2xl font-bold mt-8">{headings.formheading}</h3>
             <p className="text-[16px] font-normal text-gray-500">
               {headings.formdescription}
             </p>
           </div>
         ))}
-       {userType === 1 ? <CompanyForm/> : ""}
-       {userType === 2 ? <InvestorForm/> : ""}
-       {userType === 3 ? <StartupForm/> : ""}
-       {userType === 4 ? <LearnerForm/> : ""}
-       {userType === 5 ? <StartupIdeaFrom/> : ""}
-       {userType === 6 ? <BusinessOwnerForm/> : ""}
-       {userType === 7 ? <ProfessionalForm/> : ""}
+        <div className="z-10">
+          {userType === 1 ? <CompanyForm /> : ""}
+          {userType === 2 ? <InvestorForm /> : ""}
+          {userType === 3 ? <StartupForm /> : ""}
+          {userType === 4 ? <LearnerForm /> : ""}
+          {userType === 5 ? <StartupIdeaFrom /> : ""}
+          {userType === 6 ? <BusinessOwnerForm /> : ""}
+          {userType === 7 ? <ProfessionalForm /> : ""}
+        </div>
       </div>
     </div>
   );
