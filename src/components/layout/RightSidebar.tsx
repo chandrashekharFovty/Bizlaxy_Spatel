@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { UserAvatar } from "../ui/UserAvatar";
-
-import {
-  Label,
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/react";
-import { CheckIcon, ChevronsDownUpIcon } from "lucide-react";
+import { FollowButton } from "../ui/FollowButton";
+// import FollowButton from "@/components/ui/FollowButton";
+import { SearchIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { Transition } from "@headlessui/react";
-import { Fragment } from "react";
 
 type User = { username: string; avatar: string };
-const searchables: User[] = [
-  /* your users */
-];
+// const searchables: User[] = [
+//   /* your users */
+// ];
 
 export function RightSidebar() {
   const searchables = [
@@ -116,21 +108,66 @@ export function RightSidebar() {
     },
   ];
 
-  const footerLinks = [
-    "About",
-    "Help",
-    "Press",
-    "API",
-    "Jobs",
-    "Privacy",
-    "Terms",
-    "Locations",
-    "Language",
-    "Meta Verified",
-  ];
+  // const footerLinks = [
+  //   "About",
+  //   "Help",
+  //   "Press",
+  //   "API",
+  //   "Jobs",
+  //   "Privacy",
+  //   "Terms",
+  //   "Locations",
+  //   "Language",
+  //   "Meta Verified",
+  // ];
 
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+    const recommendedScrollRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // const [followedUsers, setFollowedUsers] = useState([]);
+
+  // useEffect(() => {
+  //   const stored = JSON.parse(localStorage.getItem("followedUsers")) || [];
+  //   setFollowedUsers(stored);
+  // }, []);
+
+  // const handleFollow = () => {
+  //   const stored = JSON.parse(localStorage.getItem("followedUsers")) || [];
+  //   setFollowedUsers(stored);
+  // };
+
+  // const filteredSuggestions = suggestions.filter(
+  //   (s) => !followedUsers.includes(s.username)
+  // );
+
+  
+
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setStartX(e.pageX - recommendedScrollRef.current.offsetLeft);
+    setScrollLeft(recommendedScrollRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - recommendedScrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // speed factor
+    recommendedScrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
 
   const filtered = query
     ? searchables.filter((u) =>
@@ -138,19 +175,28 @@ export function RightSidebar() {
       )
     : [];
 
+  const [isFollowing, setIsFollowing] = useState(false);
+  const handleFollowToggle = () => setIsFollowing(!isFollowing);
+
   return (
     <>
       <div className=" bg-white fixed overflow-hidden flex w-[370px] h-[982px] flex-col items-stretch border-[rgb(28, 75, 196, 100)] border-l">
-        <div className="dark:bg-gray-800 overflow-hidden dark:text-white fixed w-[370px] h-screen scrollbar-hide bg-white flex flex-col items-stretch px-3">
-          <div style={{ position: "relative", width: 300 }} className="mt-8 dark:bg-gray-800 dark:text-white grid w-[370px] h-[40px] cursor-default grid-cols-1 bg-white text-left rounded-3xl border-[2px] border-solid border-[#a89bfc] font-normal outline-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-            <input
-              type="text"
-              placeholder="Search users..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              style={{ width: "100%", padding: 8, boxSizing: "border-box" }}
-              className="w-[95%] h-full bg-transparent outline-none"
-            />
+        <div className="dark:dark-color overflow-hidden dark:text-white fixed w-[370px] h-screen scrollbar-hide bg-white flex flex-col items-stretch px-3">
+          <div
+            style={{ position: "relative", width: 300 }}
+            className="mt-8 dark:dark-color grid w-[370px] h-[40px] cursor-default grid-cols-1 bg-white text-left rounded-3xl border-[2px] border-solid border-[#a89bfc] font-normal outline-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          >
+            <div className="flex flex-row items-center">
+              <SearchIcon className="text-gray-400 ml-2 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search users..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                style={{ width: "100%", padding: 8, boxSizing: "border-box" }}
+                className="w-[95%] h-full bg-transparent outline-none"
+              />
+            </div>
             {filtered.length > 0 && (
               <ul
                 style={{
@@ -158,15 +204,16 @@ export function RightSidebar() {
                   top: 38,
                   left: 0,
                   right: 0,
-                  background: "#fff",
+               
                   listStyle: "none",
                   margin: 0,
                   marginTop: 5,
-                  padding: 0,
+                
                   maxHeight: 200,
                   overflowY: "auto",
                   zIndex: 10,
-                }} className="dark:bg-gray-800 dark:text-white bg-white text-black border border-[#a89bfc] rounded-xl shadow-lg"
+                }}
+                className="dark:dark-color py-1  bg-white text-black border border-[#a89bfc] rounded-xl shadow-lg"
               >
                 {filtered.map((user) => (
                   <li
@@ -177,11 +224,13 @@ export function RightSidebar() {
                     }}
                     style={{
                       display: "flex",
+                      flexDirection:"row",
                       alignItems: "center",
-                      padding: 8,
                       cursor: "pointer",
                     }}
+                  className="dark:dark-color  gap-3 px-6 py-1"
                   >
+                    <div className="">
                     <img
                       src={user.avatar}
                       alt=""
@@ -189,10 +238,17 @@ export function RightSidebar() {
                         width: 32,
                         height: 32,
                         borderRadius: "50%",
-                        marginRight: 8,
+                        marginRight: 0,
                       }}
                     />
+                </div>
+                    <div className="overflow-hidden flex flex-col gap-1 justify-center text-sm text-left font-normal leading-none">
                     {user.username}
+                    <p className="text-gray-400 text-[10px]">{user.followsYou
+                            ? "Follows you"
+                            : `Followed by ${user.followedBy}`}</p>
+                          
+                        </div>
                   </li>
                 ))}
               </ul>
@@ -216,15 +272,15 @@ export function RightSidebar() {
                   </div>
                 </div>
                 <div className="text-[#1C4BC4] text-center text-[11px] font-semibold leading-none my-auto">
-                  Switch
+                  {/* Switch */}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="dark:bg-gray-800 dark:text-white bg-white w-[370px] h-[289px] mt-4 max-md:ml-[5px] ">
-            <div className=" dark:text-white flex items-center w-[320px] h-[18px] justify-between">
-              <div className="dark:text-white text-[#050505] text-base font-bold">
+          <div className="dark:dark-color bg-white w-[370px] h-[289px] mt-4 max-md:ml-[5px] ">
+            <div className=" dark:dark-color flex items-center w-[320px] h-[18px] justify-between">
+              <div className="dark:dark-color text-[#050505] text-base font-bold">
                 Suggestions for you
               </div>
               {/* <div className="text-[#1C4BC4] text-sm font-medium">See All</div> */}
@@ -244,47 +300,86 @@ export function RightSidebar() {
                     />
                     <div className="flex justify-between w-full items-center">
                       <div className="flex flex-col items-stretch">
-                        <div className="dark:text-gray-400 text-neutral-800 text-sm font-semibold leading-none w-[110px]">
+                        <div className="dark:dark-color text-neutral-800 text-sm font-semibold leading-none w-[110px]">
                           {suggestion.username}
                         </div>
-                        <div className="overflow-hidden py-2 text-left text-[11px] text-[rgba(142,142,142,1)] font-normal leading-none">
+                        <div className="overflow-hidden py-2 text-left text-[11px] text-gray-400 font-normal leading-none">
                           {suggestion.followsYou
                             ? "Follows you"
                             : `Followed by ${suggestion.followedBy}`}
                         </div>
                       </div>
-                      <div className="dark:text-blue-500 text-[#1C4BC4] text-center cursor-pointer text-xs font-medium leading-none my-auto">
-                        Follow
+                      <div className="dark:dark-color text-[#1C4BC4] text-center cursor-pointer text-xs font-medium leading-none my-auto">
+                        <FollowButton/>
                       </div>
                     </div>
                   </div>
                 ))}
+
+           {/* {filteredSuggestions.map((suggestion, index) => (
+          <div
+            key={index}
+            className={`flex w-[320px] h-[44px] items-stretch gap-[8px] 
+            ${index > 0 ? "mt-4" : ""}`}
+          >
+            <img
+              src={suggestion.avatar}
+              className="object-contain w-[37px] shrink-0 my-auto"
+              alt=""
+            />
+            <div className="flex justify-between w-full items-center">
+              <div className="flex flex-col items-stretch">
+                <div className="text-neutral-800 text-sm font-semibold leading-none w-[110px]">
+                  {suggestion.username}
+                </div>
+                <div className="overflow-hidden py-2 text-left text-[11px] text-gray-400 font-normal leading-none">
+                  {suggestion.followsYou
+                    ? "Follows you"
+                    : `Followed by ${suggestion.followedBy}`}
+                </div>
+              </div>
+              <FollowButton
+                username={suggestion.username}
+                onFollow={handleFollow}
+              />
+            </div>
+          </div>
+        ))} */}
               </div>
             </div>
           </div>
 
           <div className="w-[320px] h-[231px] mt-4 max-md:mx-[5px]">
-            <div className="dark:bg-gray-800 flex w-full h-[25px] items-center justify-between">
-              <div className=" dark:text-white  text-[#050505] text-lg font-bold self-stretch">
+            <div className="dark:dark-color flex w-full h-[25px] items-center justify-between">
+              <div className=" dark:dark-color text-[#050505] text-lg font-bold self-stretch">
                 Recommended for You
               </div>
               <div className="text-[#1C4BC4] text-sm font-medium self-stretch ">
-                See all
+                {/* See all */}
               </div>
             </div>
 
-            <div className=" flex w-full h-[190px] items-stretch gap-[9px] overflow-x-auto scrollbar-hide mt-4">
+            <div
+  ref={recommendedScrollRef}
+  onMouseDown={handleMouseDown}
+  onMouseLeave={handleMouseLeave}
+  onMouseUp={handleMouseUp}
+  onMouseMove={handleMouseMove}
+  className={`flex w-full h-[190px] items-stretch gap-[9px] overflow-x-auto scrollbar-hide mt-4 ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+>
               {recommended.map((profile, index) => (
                 <div
                   key={index}
-                  className="dark:bg-gray-800 bg-white shadow-[0px_0px_4px_-1px_rgba(0,0,0,0.25)] border flex flex-col flex-1 w-[155px] h-[184px] px-3 py-2  rounded-[10px] border-[rgba(220,220,220,1)] border-solid"
+                  className="dark:dark-color bg-white shadow-[0px_0px_4px_-1px_rgba(0,0,0,0.25)] border flex flex-col flex-1 w-[135px] h-[184px] px-3 py-2  rounded-[10px] border-[rgba(220,220,220,1)] border-solid"
                 >
-                  <div className="flex gap-[17px] ml-[8px] max-md:ml-2.5">
+                  <div className="flex gap-4 ml-3 max-md:ml-2.5">
+                    <a href="/profile" className="cursor-pointer text-white">
                     <UserAvatar
                       src={profile.avatar}
                       size="lg"
                       className="mt-[7px]"
                     />
+                    </a>
                     <img
                       src={
                         index === 0
@@ -302,8 +397,8 @@ export function RightSidebar() {
                       {profile.role}
                     </div>
                   </div>
-                  <div className="bg-gradient-to-r cursor-pointer from-[#1C4BC4] to-[#8963b9] text-white self-stretch min-h-7 gap-2 text-xs font-normal whitespace-nowrap w-[114px] h-[27px] mt-[4px] pl-[39px] pr-[38px] py-[5px] rounded-[5.037px] max-md:px-5">
-                    Follow
+                  <div className="bg-gradient-to-r cursor-pointer from-blue-400 to-purple-400 text-white self-stretch min-h-7 w-[114px] h-[27px] mt-[4px] text-center rounded-[5px] ">
+                    <FollowButton/>
                   </div>
                 </div>
               ))}

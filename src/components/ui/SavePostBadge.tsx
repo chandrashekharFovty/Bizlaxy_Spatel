@@ -4,6 +4,7 @@ import grayHeart from  "../../../public/likeGray.png";
 import postSave from  "../../../public/postSave.png";
 import isPostSaved from  "../../../public/isPostSaved.png";
 import isDocumented from  "../../../public/isDocumented.png";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 
 interface SavePostBadgeProps {
@@ -29,17 +30,19 @@ export function SavePostBadge({ type, initialActive = false }: SavePostBadgeProp
       );
     } else if (type == "savePost") {
        return (
-          <img
-          src={isActive ? isPostSaved : postSave}
-          alt="savePost"
-          className="w-4 h-5"
-        />
+          <div onClick={handleClick } className="cursor-pointer">
+      {isActive ? (
+        <FaBookmark className="w-5 h-5 text-white dark:text-white" />
+      ) : (
+        <FaRegBookmark className="w-5 h-5 text-black dark:text-white" />
+      )}
+    </div>
        );
     }
   };
 
   return (
-    <div className="self-stretch my-auto rounded-[50px] cursor-pointer" onClick={handleClick}>
+    <div className="self-stretch my-auto rounded-[50px]  cursor-pointer" onClick={handleClick}>
         {renderIcon()}
       </div>
   );

@@ -62,8 +62,8 @@ const SelectAccountType = () => {
       </div>
 
       {/* Right side */}
-      <div className="w-[1012px] bg-white my-[60px] ml-[470px] mr-[50px]">
-        <div className="w-[780px] h-[58px] flex flex-col gap-[6px]">
+      <div className="w-[1012px] max-w-screen bg-white ml-[31%]">
+        <div className="fixed bg-white w-full h-[58px] my-8 flex flex-col gap-[6px] z-30">
           <h3 className="text-xl font-bold">Select Account Type</h3>
           <p className="text-[14px] font-normal text-gray-500">
             We’ll use this to personalize your experience and unlock relevant
@@ -71,7 +71,7 @@ const SelectAccountType = () => {
           </p>
         </div>
 
-        <div className="max-w-[912px] h-[902px] mt-10 flex flex-col gap-5">
+        <div className="w-[96%] overflow-scroll scrollbar-hide mt-[12%] h-[550px] flex flex-col gap-5 z-10">
           {options.map((opt, idx) => (
             <AccountOption
               key={idx}
@@ -83,7 +83,8 @@ const SelectAccountType = () => {
             />
           ))}
         </div>
-        <div className="flex items-end justify-end">
+        <div className="fixed w-[1010px] h-16">
+          <div className="w-[95%] h-full flex justify-end items-center">
           {
             selected ? (
               // options.map((opt, idx) => (
@@ -92,7 +93,7 @@ const SelectAccountType = () => {
                 // title={opt.title}
                 // desc={opt.desc}
                 // selected={selected === opt.title}
-                className="w-[122px] h-[55px] cursor-pointer mt-6 px-6 py-2 border text-lg rounded-[10px] border-[#B0B0B0] text-white font-semibold bg-gradient-to-br from-blue-600 to-purple-600 hover:bg-blue-700"
+                className="w-[122px] h-[55px] cursor-pointer mt-6 px-6 py-2 border text-lg rounded-[10px] border-[#B0B0B0] text-white font-semibold btn-gradient hover:bg-blue-700"
                 //onClick={() => setSelected(opt.title)}
                 //onClick={() => setSelected(opt.title)}
                 onClick={() =>
@@ -114,6 +115,7 @@ const SelectAccountType = () => {
             )
             
           }
+          </div>
         </div>
       </div>
     </div>

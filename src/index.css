@@ -21,12 +21,19 @@
   .theme-bg {
     @apply bg-gradient-to-br from-[#ebdeff] via-[#4470ff] to-[#2505dd];
   }
-
+.dark-color{
+  background-color:#050505; 
+  color: #B4B4B4
+}
   .glass-bg {
     @apply backdrop-blur-[50px] bg-white/10;
   }
    .glass-bg-dark{
     @apply backdrop-blur-[50px] bg-black/10;
+  }
+  .glass-bg-light{
+  
+    @apply backdrop-blur-[50px] bg-white/10;
   }
 
   .purple-circle {
@@ -171,7 +178,7 @@ sidebar-text::before {
 
 /* Style each country item */
 .glass-dropdown .country {
-  @apply px-3 py-2 hover:bg-white/10 cursor-pointer;
+  @apply px-3 py-2 hover:bg-white/70 cursor-pointer;
 }
 
 .inputBox {

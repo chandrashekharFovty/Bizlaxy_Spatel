@@ -53,7 +53,7 @@ const EduvidContent = [
 
 export default function BusinessCard() {
   return (
-    <div className=" dark:bg-gray-800 dark:text-white w-full h-auto overflow-y-scroll scrollbar-hide flex flex-col items-center gap-6 ">
+    <div className=" dark:dark-color w-full h-auto overflow-y-scroll scrollbar-hide flex flex-col items-center gap-6 ">
       {EduvidContent.map((item) => (
         <div
           key={item.id}

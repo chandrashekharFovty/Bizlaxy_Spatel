@@ -18,7 +18,6 @@ import { error } from "console";
 import { Country } from "country-state-city";
 import * as Flags from "country-flag-icons/react/3x2";
 
-// const countries = [
 //   {
 //     id: "IN",
 //     name: "India",
@@ -359,10 +358,25 @@ export default function PhoneInputWithModal() {
   const formRef = useRef();
   const { hookHandleSubmit, showError, showSuccess } = postData();
 
-  const validatePhone = (v) =>
-    !v
-      ? "Please Enter phone"
-      : !/^\d{10}$/.test(v) && "Please Phone must be 10 digits";
+   const validatePhone = (v) => {
+    if (!v) return "Please enter phone number";
+    const dialCode = selected?.dialCode || "";
+
+    if (dialCode === "91" || dialCode === "+91") {
+      return /^\d{10}$/.test(v) ? "" : "Phone must be 10 digits for India";
+    }
+
+    if (dialCode === "1" || dialCode === "+1") {
+      return /^\d{10}$/.test(v) ? "" : "Phone must be 10 digits for US/Canada";
+    }
+
+    if (dialCode === "44" || dialCode === "+44") {
+      return /^\d{10,11}$/.test(v) ? "" : "Phone must be 10–11 digits for UK";
+    }
+
+    return /^\d{5,15}$/.test(v) ? "" : "Phone number must be 5–15 digits";
+  };
+
 
   const onPhoneChange = (e) => {
     const v = e.target.value;
@@ -521,11 +535,11 @@ export default function PhoneInputWithModal() {
       <Dialog open={open} onClose={setOpen} className="relative z-50 bg-transparent opacity-100">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-trasparent transition-opacity data-closed:opacity-1 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+          className="fixed inset-0  data-closed:opacity-1 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
         />
         {/* {isModalOpen && ( */}
-        <div className="fixed inset-0 bg-opacity-100 flex items-center justify-center z-50">
-          <DialogPanel className="w-[604px] shadow-md bg-transparent shadow-blue-400 h-[530px] scrollbar-hide glass-bg-mobile rounded-xl p-4 max-h-[80%] overflow-y-auto">
+        <div className="fixed inset-0 bg-opacity-60 flex items-center justify-center z-50 glass-bg">
+          <DialogPanel className="w-[604px] shadow-md  shadow-blue-400 h-[530px] scrollbar-hide  rounded-xl p-4 max-h-[80%] overflow-y-auto">
             <button
               onClick={() => setOpen(false)}
               className="text-white text-[16px] mb-4"

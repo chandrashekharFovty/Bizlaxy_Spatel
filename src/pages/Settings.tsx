@@ -16,7 +16,7 @@ function AllSettings() {
   };
 
   return (
-   <div className="dark:glass-bg-dark dark:border dark:border-white rounded-xl absolute z-50 w-[347px] h-[326px] left-full -translate-y-1/2 ml-4 bg-white shadow-lg p-2 mb-10 -mt-[52%]">
+   <div className="dark:glass-bg-dark dark:border dark:border-white rounded-xl absolute z-50 w-[347px] h-[290px] left-full -translate-y-1/2 ml-4 bg-white shadow-lg p-2 mb-20 -mt-[65%]">
       <div className="w-[159px] w-3/12 dark:text-white dark:font-medium h-[24px] text-[18px] font-bold px-3 py-2 mt-2">
         More Options
       </div>

@@ -123,10 +123,12 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
               )}
               {showOfficialIcon && <img src={officialIcon} className="w-3 h-3" />}
               {showFollowButton && (
-                <FollowButton
-                  isFollowing={isFollowing}
-                  onClick={handleFollowToggle}
-                />
+                 <button
+      onClick={handleFollowToggle}
+      className={`px-4 py-2`}
+    >
+      {isFollowing ? "Following" : "Follow"}
+    </button>
               )}
             </div>
             <span className="dark:text-gray-400 text-xs text-gray-500">
@@ -191,18 +193,17 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
 
       <div className="flex justify-between text-xs font-medium mt-3">
         <div className="flex items-center gap-4">
-       <div
-  onClick={handleLike}
-  className="flex items-center gap-1 cursor-pointer border border-gray-400 h-8 px-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
->
-  {isLiked ? (
-    <FaHeart className="text-lg text-red-500" />
-  ) : (
-    <LuHeart className="text-lg text-gray-700 dark:text-white" />
-  )}
-  <span className="text-sm">{likes}</span>
-</div>
-
+    <div
+    onClick={handleLike}
+    className="flex items-center gap-1 cursor-pointer border border-gray-400 h-8 px-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+  >
+    {isLiked ? (
+      <FaHeart className="text-lg text-red-500" />
+    ) : (
+      <LuHeart className="text-lg text-gray-700 dark:text-white" />
+    )}
+    <span className={`text-sm ${isLiked ? "text-red-500" : ""}`}>{likes}</span>
+  </div>
 
           <div
             onClick={handleComment}

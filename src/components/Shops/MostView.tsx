@@ -1,94 +1,94 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const mostViewedItems = [
   {
     image: "pant.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Fashion Corp",
   },
   {
     image: "Tshirts.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Gadget World",
   },
   {
     image: "Shirt.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Beauty Co",
   },
-  {
-    image: "Tshirts.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
-    supplier: "Fashion Corp",
-  },
-  {
+ {
     image: "pant.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
-    supplier: "Gadget World",
-  },
-  {
-    image: "pant.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Fashion Corp",
   },
   {
     image: "Tshirts.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Gadget World",
   },
   {
     image: "Shirt.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Beauty Co",
   },
-  {
-    image: "Tshirts.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+   {
+    image: "pant.png",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Fashion Corp",
   },
   {
-    image: "pant.png",
-    discription: "Custmized logo Design for Men and Women",
-    price: "₹430/10 prieces",
+    image: "Tshirts.png",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Gadget World",
   },
   {
-    image: "https://via.placeholder.com/100x100?text=Lipstick",
-
+    image: "Shirt.png",
+    description: "Customized logo Design for Men and Women",
+    price: "₹430/10 pieces",
     supplier: "Beauty Co",
   },
-
-  // ... add similar structure for all remaining items
 ];
 
 const MostView = () => {
   const [showAll, setShowAll] = useState(false);
+  // const location = useLocation();
+
+
+  // const category = location.state?.category || "Dashboard";
 
   const itemsToShow = showAll ? mostViewedItems : mostViewedItems.slice(0, 6);
 
   return (
-    <div className="mt-8 w-[90%] ">
-      <div className="flex justify-between items-center mb-3">
+    <div className="mt-8">
+      {/* <Link
+        to="/shop"
+        className="dark:text-white text-sm text-blue-600 mb-4 inline-block"
+      >
+        &lt; Back to {category}
+      </Link> */}
+
+      <div className="flex  mb-3">
         <h2 className="text-lg font-semibold">Most Viewed</h2>
         {!showAll && (
           <button
-            className="text-blue-500 text-sm"
+            className="text-blue-500 ml-auto text-sm"
             onClick={() => setShowAll(true)}
           >
             See all
           </button>
         )}
       </div>
-      <div className="w-[110%] h-[350px]  grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6  gap-4">
+
+      <div className=" h-[350px]  grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
         {itemsToShow.map((item, index) => (
           <div
             key={index}
@@ -96,17 +96,14 @@ const MostView = () => {
           >
             <img
               src={item.image}
-              alt={item.name}
+              alt={item.description}
               className="w-full h-[200px] object-contain mb-1"
             />
-           <p className="mt-2"> {item.discription}</p>
-            {/* <br/> */}
-             <p className="dark:text-white mt-2 text-black font-bold">{item.price}</p>
-                {/* {item.discription} */}
-               <button className="mt-2 bg-gradient-to-r from-blue-800 to-purple-700 text-white text-sm px-4 py-2 rounded-xl">
-  Gradient Button
-</button>
-
+            <p className="mt-2">{item.description}</p>
+            <p className="dark:text-white mt-2 text-black font-bold">{item.price}</p>
+            <button className="mt-2 bg-gradient-to-r from-blue-800 to-purple-700 text-white text-sm px-4 py-2 rounded-xl">
+              Gradient Button
+            </button>
           </div>
         ))}
       </div>

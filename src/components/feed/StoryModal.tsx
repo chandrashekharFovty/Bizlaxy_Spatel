@@ -12,19 +12,23 @@ interface Props {
 
 const StoryModal: React.FC<Props> = ({ story, onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center px-4 py-6">
+    <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center px-4 py-6">
       {/* Close and Logo */}
       <div className="absolute top-4 left-6 text-white text-xl  ">
-        <Link to="/feed">BIZLAXY</Link>
+        <div className="cursor-pointer mt-5 max-lg:text-[16px] max-md:text-[16px] max-md:tracking-[0px] max-lg:tracking-[1px] text-[22px] md:font-normal uppercase ml-5 max-lg:w-[90px] max-lg:ml-1 w-[124px] h-[28px] tracking-[3px]">
+          <Link to="/feed" className="font-medium">
+            Bizlaxy
+          </Link>
+        </div>
       </div>
-      <div className="absolute top-4 right-6">
+      <div className="absolute top-4 right-6 mt-5">
         <X onClick={onClose} className="text-white w-6 h-6 cursor-pointer" />
       </div>
 
       {/* Modal Container */}
-      <div className="relative bg-black/70 w-full max-w-[400px] h-[640px] rounded-xl flex flex-col justify-between overflow-hidden shadow-lg ">
+      <div className="relative bg-black/70 w-full max-w-[400px] h-[90%] rounded-xl flex flex-col justify-between overflow-hidden shadow-lg ">
         {/* Top Section */}
-        <div className="p-4">
+        <div className="">
           {/* Progress Bars */}
           <div className="flex gap-1 mb-4">
             {Array.from({ length: 6 }).map((_, index) => (
@@ -38,7 +42,7 @@ const StoryModal: React.FC<Props> = ({ story, onClose }) => {
           </div>
 
           {/* User Info */}
-          <div className="flex justify-between items-center">
+          <div className="relative flex justify-between items-center">
             <div className="flex items-center gap-3">
               <img
                 src={story.imageSrc}
@@ -61,26 +65,26 @@ const StoryModal: React.FC<Props> = ({ story, onClose }) => {
         </div>
 
         {/* Bottom Section */}
-        <div className="p-4 flex justify-between items-center border-t border-white/10">
+        <div className="flex justify-between items-center border-t border-white/10">
           <input
             type="text"
             placeholder="Send Message"
-            className="flex-1 mr-3 h-9 bg-transparent border border-white/30 text-white px-3 rounded-xl text-sm placeholder-white/60 focus:outline-none"
+            className="flex-1 mr-3 h-9 bg-transparent border outline-white text-white px-3 rounded-xl text-sm placeholder-white/60"
           />
           <div className="flex gap-3">
             <Heart className="text-white w-5 h-5 cursor-pointer" />
             <Send className="text-white w-5 h-5 cursor-pointer" />
           </div>
         </div>
-      </div>
-
       {/* Next Story Button */}
+      </div>
       <button
-        className="absolute bottom-8 right-8 bg-white/10 hover:bg-white/20 p-3 rounded-full text-white transition"
+        className="absolute max-2xl:left-[64%] max-xl:left-[64%]  max-sm:left-[78%] max-md:left-[90%] top-[44%] bg-white/10 hover:bg-white/20 p-3 rounded-full text-white transition"
         aria-label="Next Story"
       >
         <ArrowRightCircle className="w-6 h-6" />
       </button>
+
     </div>
   );
 };

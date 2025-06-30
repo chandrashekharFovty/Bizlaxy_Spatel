@@ -131,7 +131,7 @@ const Sidebar: React.FC = () => {
   }, []);
 
   return (
-    <div className="dark:bg-gray-800 dark:text-white bg-white fixed max-xl:w-60 min-h-[982px] max-h-screen w-[245px] max-lg:w-[70px] border-solid border-r-2 border-[#f3f2fa] pr-px z-40">
+    <div className="dark:dark-color bg-white fixed max-xl:w-60 min-h-[982px] max-h-screen w-[245px] max-lg:w-[70px] border-solid border-r-2 border-[#f3f2fa] pr-px z-40">
       <div className="cursor-pointer mt-8 max-lg:text-[16px] max-md:text-[16px] max-md:tracking-[0px] max-lg:tracking-[1px] text-[22px] md:font-normal uppercase ml-5 max-lg:w-[90px] max-lg:ml-1 w-[124px] h-[28px] tracking-[3px]">
         <Link to="/feed" className="font-medium">
           Bizlaxy

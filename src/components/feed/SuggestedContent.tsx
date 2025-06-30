@@ -12,7 +12,7 @@ export function SuggestedContent({ title, items }: SuggestedContentProps) {
   return (
     <div className="w-full mt-4 rounded-[0px_0px_0px_0px]">
       <div className="flex items-center gap-[40px_100px] justify-between flex-wrap">
-        <div className="text-[#050505] text-lg font-bold self-stretch my-auto">
+        <div className="dark:text-white  text-[#050505] text-lg font-bold self-stretch my-auto">
           {title}
         </div>
         <div className="text-[#1C4BC4] cursor-pointer text-sm font-medium self-stretch my-auto">

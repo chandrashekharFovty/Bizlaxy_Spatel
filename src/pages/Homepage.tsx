@@ -6,7 +6,7 @@ import { RightSidebar } from "@/components/layout/RightSidebar";
 const Homepage = () => {
   return (
     <>
-  <div className="dark:bg-gray-800 dark:text-white relative w-full min-h-screen bg-white overflow-hidden">
+  <div className="dark:dark-color relative w-full min-h-screen bg-white overflow-hidden">
   {/* Upper Purple Circle */}
   <div className="absolute top-[7%] left-[60%] w-[300px] h-[300px] rounded-full bg-purple-500/60 z-0" />
 

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import Category from "./Categories";
 import { useNavigate } from "react-router-dom";
 
-const CategorySection = () => {
-  const navigate = useNavigate();
 
+const CategorySection = () => {
   const allCategories = [
-     {
-      id:1,
+    {
+      id: 1,
       imageSrc:
         "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/d4ef8c28a68dc9cd16d46529e6825ac3712902eb?placeholderIfAbsent=true",
-      name: "Clothing",
+      name: "Apparal",
       imageStyles: "aspect-[0.79] object-contain w-[114px] z-10",
     },
     {
@@ -56,7 +56,7 @@ const CategorySection = () => {
       name: "Appliances",
       imageStyles: "aspect-[0.79] object-contain w-[114px] z-10",
     },
-      {
+    {
       imageSrc:
         "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/c4168adb49f5ed81eb98f0016541da1f9a3eb3ee?placeholderIfAbsent=true",
       name: "Mobiles",
@@ -103,72 +103,174 @@ const CategorySection = () => {
       containerStyles:
         "flex flex-col items-stretch justify-center px-[21px] py-3.5 max-md:pl-5",
     },
-     {
-      imageSrc:
-        "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/d127a9c16e82e2358869f29a9d4b41823bbbacf7?placeholderIfAbsent=true",
-      name: "Accessories",
-      imageStyles: "aspect-[1.08] object-contain w-[122px]",
-      containerStyles:
-        "flex flex-col items-stretch justify-center px-[21px] py-3.5 max-md:pl-5",
-    },
-     {
-      imageSrc:
-        "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/d127a9c16e82e2358869f29a9d4b41823bbbacf7?placeholderIfAbsent=true",
-      name: "Accessories",
-      imageStyles: "aspect-[1.08] object-contain w-[122px]",
-      containerStyles:
-        "flex flex-col items-stretch justify-center px-[21px] py-3.5 max-md:pl-5",
-    },
+  ];
+
+  const products = [
+  {
+    id: 1,
+    name: "Shirt",
+    category: "Hoodies",
+    image: "/Shirt11.png", 
+  },
+   {
+    id: 1,
+    name: "Jocket",
+    category: "Apparal",
+    image: "/Shirt7.png", 
+  },
+   {
+    id: 1,
+    name: "T-shirt",
+    category: "Apparal",
+    image: "/Shirt10.png", 
+  },
+   {
+    id: 1,
+    name: "Shirt",
+    category: "Apparal",
+    image: "/Shirt5.png", 
+  },
+   {
+    id: 1,
+    name: "Jeans",
+    category: "Apparal",
+    image: "/pant1.png", 
+  },
+   {
+    id: 1,
+    name: "Cargo",
+    category: "Apparal",
+    image: "/pant2.png", 
+  },
+   {
+    id: 1,
+    name: "Tracksuits",
+    category: "Apparal",
+    image: "/Shirt9.png", 
+  },
     {
-      imageSrc:
-        "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/6734b0e54b816b35f99bf47af898586a0e1636c4?placeholderIfAbsent=true",
-      name: "More",
-      imageStyles: "aspect-[1] object-contain w-11",
-      containerStyles:
-        "flex flex-col items-center justify-center px-8 py-[49px] max-md:px-5",
+    id: 1,
+    name: "Polo's",
+    category: "Apparal",
+    image: "/Shirt8.png", 
+  },
+    {
+    id: 1,
+    name: "Sweatshirt",
+    category: "Apparal",
+    image: "/Shirt1.png", 
+  },
+    {
+    id: 1,
+    name: "Formal",
+    category: "Apparal",
+    image: "/Shirt4.png", 
+  },
+    {
+    id: 1,
+    name: "Casual",
+    category: "Apparal",
+    image: "/Shirt2.png", 
+  },
+    {
+    id: 1,
+    name: "Ethnic",
+    category: "Apparal",
+    image: "/Shirt3.png", 
+  },
+// Shorts
+    {
+      id: 2,
+      name: "Smartwatch",
+      category: "Gadgets",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/your-gadget-image",
     },
+    
   ];
 
   const [showAll, setShowAll] = useState(false);
-  const categoriesToShow = showAll ? allCategories : allCategories.slice(2, 13); // Show first 11 if not expanded
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleCategoryClick = (categoryName) => {
-    const encodedName = encodeURIComponent(categoryName);
-    navigate(`/products/${encodedName}`);
+    setSelectedCategory(categoryName);
   };
 
-  return (
-    <div className="flex flex-wrap gap-8 w-full ">
-      {categoriesToShow.map((category, id) => (
-        <div
-          key={id}
-          onClick={() => handleCategoryClick(category.name)}
-          className={`w-[170px] h-[200px] border rounded-xl flex flex-col items-center justify-center cursor-pointer hover:shadow-md ${category.containerStyles || ""}`}
-        >
-          <img
-            src={category.imageSrc}
-            alt={category.name}
-            className={`${category.imageStyles || "w-20 h-20"} mb-2`}
-          />
-          <span className="text-sm font-medium text-center">{category.name}</span>
-        </div>
-      ))}
+  const filteredProducts = selectedCategory
+    ? products.filter((p) => p.category === selectedCategory)
+    : [];
 
-      {!showAll && (
-        <div
-          onClick={() => setShowAll(true)}
-          className="w-[160px] h-[200px] border rounded-xl flex flex-col items-center justify-center cursor-pointer hover:shadow-md"
-        >
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/6734b0e54b816b35f99bf47af898586a0e1636c4?placeholderIfAbsent=true"
-            alt="More"
-            className="w-10 h-10 mb-2"
-          />
-          <span className="text-sm font-medium text-center">More</span>
-        </div>
+  const categoriesToShow = showAll
+    ? allCategories
+    : allCategories.slice(0, 11);
+
+const navigate = useNavigate();
+
+ const handleProductClick = (product) => {
+  navigate("/shopproduct", { state: { category: selectedCategory, product } });
+};
+
+
+
+  return (
+    <div className="flex flex-wrap gap-8 w-full">
+      {selectedCategory ? (
+      filteredProducts.map((product) => (
+  <div
+    key={product.id}
+    onClick={() => handleProductClick(product)}
+    className="cursor-pointer"
+  >
+    <div className="w-[170px] h-[190px] border rounded-xl flex flex-col items-center justify-center">
+      <img
+        src={product.image}
+        alt={product.name}
+        className="w-[150px] h-[150px] mb-2"
+      />
+    </div>
+    <span className="text-lg font-medium flex item-center justify-center mt-2 text-center">
+      {product.name}
+    </span>
+  </div>
+))
+      ) : (
+        <>
+          {categoriesToShow.map((category, index) => (
+            <div
+              key={index}
+              onClick={() => handleCategoryClick(category.name)}
+              className={`w-[170px] h-[200px] border rounded-xl flex flex-col items-center justify-center cursor-pointer hover:shadow-md ${category.containerStyles || ""}`}
+            >
+              <img
+                src={category.imageSrc}
+                alt={category.name}
+                className={`${category.imageStyles || "w-20 h-20"} mb-2`}
+              />
+              <span className="text-sm font-medium text-center">
+                {category.name}
+              </span>
+            </div>
+          ))}
+
+          {!showAll && (
+            <div
+              onClick={() => setShowAll(true)}
+              className="w-[160px] h-[200px] border rounded-xl flex flex-col items-center justify-center cursor-pointer hover:shadow-md"
+            >
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/6734b0e54b816b35f99bf47af898586a0e1636c4?placeholderIfAbsent=true"
+                alt="More"
+                className="w-10 h-10 mb-2"
+              />
+              <span className="text-sm font-medium text-center">More</span>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
 };
 
 export default CategorySection;
+
+

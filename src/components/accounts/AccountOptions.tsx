@@ -17,7 +17,7 @@ const AccountOption = ({id, title, desc, selected, onClick }) => {
 
         <div
           className={`w-10 h-10 rounded-full border-2 border-[#BED6FF] flex items-center justify-center mt-1 ${
-            selected ? "border-[#1C4BC4] bg-gradient-to-br from-blue-600 to-purple-600" : "border-[#BED6FF]"
+            selected ? "border-[#1C4BC4] btn-gradient" : "border-[#BED6FF]"
           }`}
         >
         <div className={`w-5 h-5 border-2 border-[#BED6FF] rounded-full ${selected ? "bg-[#BED6FF] " : "bg-trasparent"}`}></div>

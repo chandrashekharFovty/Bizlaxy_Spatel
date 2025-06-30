@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import CreateStory from "../components/feed/CreatePost/CreateStory";
-import CreatePost from "../components/feed/CreatePost/CreatePost";
+import CreatePost1 from "../components/feed/CreatePost/CreatePost1";
 import Product from "../components/feed/Product/Product";
 import { Link } from 'react-router-dom';
 import addpost from '../../public/addpost.png';
@@ -36,7 +36,7 @@ function Create() {
 
       {/* Create Post Dialog */}
       {showCreatePostPopover && (
-        <CreatePost
+        <CreatePost1
           onClose={() => {
             setShowCreatePostPopover(false);
             setShowCreatePopover(true);

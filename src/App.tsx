@@ -49,6 +49,13 @@ import Shipping from "./components/feed/Product/Shipping";
 import MoreDetial from "./components/feed/Product/MoreDetial";
 
 import PrivateRoute from "./routes/PrivateRoute";
+import VoiceCall from "./components/chatMessage/VoiceCall";
+import VideoCall from "./components/chatMessage/VideoCall";
+import MostView from "./components/Shops/MostView";
+import ShopProduct from "./components/Shops/ShopProducts";
+import CreatePost from "./components/feed/CreatePost/CreatePost";
+import ShopProfile from "./components/Shops/ShopProfile";
+
 
 const appRouter = createBrowserRouter([
   { path: "/", element: <SignIn /> },
@@ -74,15 +81,15 @@ const appRouter = createBrowserRouter([
   { path: "/adds", element: <PrivateRoute><AddsManager /></PrivateRoute> },
   { path: "/createaddoptions", element: <PrivateRoute><CreateAddOptions /></PrivateRoute> },
   { path: "/products/:category", element: <PrivateRoute><ProductList /></PrivateRoute> },
-  { path: "/product/:productId", element: <PrivateRoute><ProductCartDetial /></PrivateRoute> },
+  // { path: "/product/:productId", element: <PrivateRoute><ProductCartDetial /></PrivateRoute> },
   { path: "/settings", element: <PrivateRoute><Settings /></PrivateRoute> },
 
   // Product-related (feed)
   { path: "/product", element: <PrivateRoute><Product /></PrivateRoute> },
   { path: "/next-page", element: <PrivateRoute><NextPages /></PrivateRoute> },
-  { path: "/priceinventory", element: <PrivateRoute><PriceInvetory /></PrivateRoute> },
-  { path: "/shipping", element: <PrivateRoute><Shipping /></PrivateRoute> },
-  { path: "/moredetail", element: <PrivateRoute><MoreDetial /></PrivateRoute> },
+  { path: "/priceInvetory", element: <PrivateRoute><PriceInvetory /></PrivateRoute> },
+  { path: "/shiping", element: <PrivateRoute><Shipping /></PrivateRoute> },
+  { path: "/moredetial", element: <PrivateRoute><MoreDetial /></PrivateRoute> },
 
   // Ads
   { path: "/advanced", element: <PrivateRoute><CreateAddOptions /></PrivateRoute> },
@@ -95,6 +102,26 @@ const appRouter = createBrowserRouter([
   { path: "/editprofile", element: <PrivateRoute><Editprofile /></PrivateRoute> },
   { path: "/investerprofile", element: <PrivateRoute><InvesterProfile /></PrivateRoute> },
   { path: "/infoprofile", element: <PrivateRoute><InfoProfile/></PrivateRoute> },
+  
+
+  //Messages
+  { path: "/voicecall", element: <PrivateRoute><VoiceCall/></PrivateRoute> },
+  { path: "/videocall", element: <PrivateRoute><VideoCall/></PrivateRoute> },
+
+//Shop
+  { path: "/MostView", element: <PrivateRoute><MostView/></PrivateRoute> },
+  { path: "/shopproduct", element: <PrivateRoute><ShopProduct/></PrivateRoute> },
+  { path: "/productcart", element: <PrivateRoute><ProductCartDetial/></PrivateRoute> },
+
+
+  { path: "/createPost", element: <PrivateRoute><CreatePost/></PrivateRoute> },
+  { path: "/shopprofile", element: <PrivateRoute><ShopProfile/></PrivateRoute> },
+
+
+
+
+
+
 
   // 404
   { path: "/*", element: <NotFound /> },

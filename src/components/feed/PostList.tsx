@@ -233,18 +233,18 @@ export function PostList() {
   <div className="flex flex-col h-full mt-2 items-center gap-6 w-full">
     <Story items={storyItems} />
 
-        <div className="flex flex-col gap-6 w-full max-w-[700px]">
+        <div className="dark:text-white flex flex-col gap-6 w-full max-w-[700px]">
           {posts.slice(0, 4).map((post, index) => (
             <Post key={index} {...post} />
           ))}
         </div>
 
-        <div className="flex flex-col gap-6 w-full max-w-[700px]">
+        <div className="dark:text-white flex flex-col gap-6 w-full max-w-[700px]">
           <SuggestedContent {...suggestedContent} />
         </div>
        
         {viewMore && (
-          <div className="flex flex-col gap-6 w-full max-w-[700px]">
+          <div className="flex dark:text-white  flex-col gap-6 w-full max-w-[700px]">
             {posts.slice(0, 4).map((post, index) => (
               <Post key={index} {...post} />
             ))} 

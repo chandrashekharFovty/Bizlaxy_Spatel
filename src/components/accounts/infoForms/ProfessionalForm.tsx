@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Country, State, City } from "country-state-city";
-import MultiSelect from "react-multiple-select-dropdown-lite";
+import { MultiSelect } from "react-multi-select-component";
 // import "react-multiple-select-dropdown-lite/dist/index.css";
 import "../../../customDropDwon.css"; // Assuming you have some custom styles
 
 // import type { ICountry, IState, ICity } from "country-state-city";
-
+type OptionType = { label: string; value: string };
 // Options for MultiSelect businessType, industrySector, and businessModel
 const businessTypes = [
   { label: "Manufacturer", value: "manufacturer" },
@@ -20,7 +20,7 @@ const businessTypes = [
   { label: "Trader", value: "trader" },
   { label: "Supplier", value: "supplier" },
   {
-    label: "Other ",//(custom category for specific type of business not listed)
+    label: "Other ", //(custom category for specific type of business not listed)
     value: "other",
   },
 ];
@@ -136,17 +136,33 @@ const CompanyForm: React.FC = () => {
   const [businessvalue, setbusinessvalue] = useState();
   const [industryvalue, setindustryvalue] = useState();
   const [valuebusinessModel, setvaluebusinessModel] = useState();
+  const [selectedBusinessTypes, setSelectedBusinessTypes] = useState<
+    OptionType[]
+  >([]);
+  const [selectedIndustries, setSelectedIndustries] = useState<OptionType[]>(
+    []
+  );
+  const [selectedBusinessModels, setSelectedBusinessModels] = useState<
+    OptionType[]
+  >([]);
+
   const handleOnbusinesschange = (val) => {
+    setSelectedBusinessTypes(val);
     setbusinessvalue(val);
     handleChange(val);
+    handleBlur(val);
   };
   const handleOnindustrychange = (val) => {
+    setSelectedIndustries(val);
     setindustryvalue(val);
     handleChange(val);
+    handleBlur(val);
   };
   const handleOnbusinessModelchange = (val) => {
+    setSelectedBusinessModels(val);
     setvaluebusinessModel(val);
     handleChange(val);
+    handleBlur(val);
   };
 
   form.businessType = businessvalue;
@@ -227,13 +243,10 @@ const CompanyForm: React.FC = () => {
   console.log("Progress Percentage:", progressPercentage);
   // Simulate progress bar width
   const progressBarWidth = `${Math.min(progressPercentage, 100)}%`;
-  console.log("Progress Bar Width:", progressBarWidth);
+  //console.log("Progress Bar Width:", progressBarWidth);
 
   // Update the width of the progress bar dynamically
-  const progressBarStyle = {
-    width: progressBarWidth,
-  };
-  console.log("Progress Bar Style:", progressBarStyle);
+  //console.log("Progress Bar Style:", progressBarStyle);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -245,347 +258,377 @@ const CompanyForm: React.FC = () => {
     if (!isValid) return;
 
     const fd = new FormData(e.currentTarget);
-    console.log("FormData:", Object.fromEntries(fd.entries()));
+    //console.log("FormData:", Object.fromEntries(fd.entries()));
     // Use the progressBarStyle in your JSX if needed
     // For example, you can apply it to a div or a progress bar component
-    console.log("Is Valid:", isValid);
+    //console.log("Is Valid:", isValid);
     console.log("Form Data:", form);
     navigate("/feed");
   };
 
   return (
     <>
-      <div className="w-full h-[8px] mt-5 mb-5 flex gap-1">
-        {progressbarArray.map((_, index) => (
-          <div
-            className="w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"
-            key={index}
-          >
+      <div className="w-full h-auto">
+        <div className="fixed w-full flex gap-1">
+          {progressbarArray.map((_, index) => (
             <div
-              className={`bg-indigo-600 h-2.5 rounded-full dark:bg-indigo-500 ${
-                index < progress ? "w-full" : "w-0"
-              }`}
-            ></div>
-          </div>
-        ))}
-      </div>
-
-      <form
-        onSubmit={onSubmit}
-        encType="multipart/form-data"
-        className="w-full flex flex-col gap-6"
-      >
-        {/* Company Name */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">Company Name</label>
-          <input
-            name="companyName"
-            value={form.companyName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            placeholder="Enter your company name here"
-            className="w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-          />
-          {errors.companyName && (
-            <div className="text-red-500 text-sm mt-1">
-              {errors.companyName}
-            </div>
-          )}
-        </div>
-
-        {/* Business Type */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">Business Type</label>
-          {/* MultiSelect Component */}
-          <div className="w-full mt-2">
-            <MultiSelect
-              onChange={handleOnbusinesschange}
-              onBlur={handleBlur}
-              value={businessvalue}
-              options={businessTypes}
-              className={`w-full outline-[#BED6FF] border border-[#BED6FF] text-sm`}
-            />
-          </div>
-
-          {errors.businessType && (
-            <div className="text-red-500 text-sm mt-1">
-              {errors.businessType}
-            </div>
-          )}
-        </div>
-
-        {/* Industry Sector */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">Industry & Sector</label>
-          {/* MultiSelect Component */}
-          <div className="w-full mt-2">
-            <MultiSelect
-              onChange={handleOnindustrychange}
-              onBlur={handleBlur}
-              value={industryvalue}
-              options={industrySectors}
-              className={`w-full outline-[#BED6FF] border border-[#BED6FF] text-sm`}
-            />
-          </div>
-
-          {errors.industrySector && (
-            <div className="text-red-500 text-sm mt-1">
-              {errors.industrySector}
-            </div>
-          )}
-        </div>
-
-        {/* Business Model */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">Business Model</label>
-          {/* MultiSelect Component */}
-          <div className="w-full mt-2">
-            <MultiSelect
-              onChange={handleOnbusinessModelchange}
-              onBlur={handleBlur}
-              value={valuebusinessModel}
-              options={businessModels}
-              className={`w-full outline-[#BED6FF] border border-[#BED6FF] text-sm`}
-            />
-          </div>
-
-          {errors.businessModel && (
-            <div className="text-red-500 text-sm mt-1">
-              {errors.businessModel}
-            </div>
-          )}
-        </div>
-        {/* Stage */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">Stage</label>
-          <div className="mt-2 flex gap-2">
-            <button
-              type="button"
-              onClick={() => handleStageSelect("Early")}
-              className={`px-3 py-2 rounded-xl w-auto ${
-                form.companyStage === "Early" ? "bg-[#bce2fd]" : "bg-[#EAF6FF]"
-              } border border-[#BED6FF] text-sm`}
+              className="w-[5.8%] bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-indigo-200"
+              key={index}
             >
-              Early Stage
-            </button>
-            <button
-              type="button"
-              onClick={() => handleStageSelect("Growth")}
-              className={`px-3 py-2 rounded-xl w-auto ${
-                form.companyStage === "Growth" ? "bg-[#bce2fd]" : "bg-[#EAF6FF]"
-              } border border-[#BED6FF] text-sm`}
-            >
-              Growth Stage
-            </button>
-            <button
-              type="button"
-              onClick={() => handleStageSelect("Mature")}
-              className={`px-3 py-2 rounded-xl w-auto ${
-                form.companyStage === "Mature" ? "bg-[#bce2fd]" : "bg-[#EAF6FF]"
-              } border border-[#BED6FF] text-sm`}
-            >
-              Mature Stage
-            </button>
-          </div>
-          {errors.companyStage && (
-            <div className="text-red-500 text-sm mt-1">
-              {errors.companyStage}
+              <div
+                className={`btn-gradient h-2.5 rounded-full dark:bg-indigo-500 ${
+                  index < progress ? "w-full" : "w-0"
+                }`}
+              ></div>
             </div>
-          )}
+          ))}
         </div>
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-        <label className="text-sm font-medium">Amount Required for Funding</label>
-        <div className="w-full h-[46px] flex flex-row justify-between items-center mt-1">
-         {/* Funding Range: Min */}
-          <div className="w-5/12 flex flex-col">
-            <input
-              type="number"
-              name="minFunding"
-              placeholder="Min"
-              value={form.minFunding}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-            />
-            {errors.minFunding && (
-              <div className="text-red-500 text-sm">
-                {errors.minFunding}
+        <form
+          onSubmit={onSubmit}
+          encType="multipart/form-data"
+          className="w-full overflow-scroll scrollbar-hide mt-[11%] h-[600px] flex flex-col gap-5 z-10"
+        >
+          <div className="w-[97%] overflow-scroll scrollbar-hide mt-[3%] h-[600px] flex flex-col gap-5 z-10">
+            {/* Company Name */}
+            <div className="w-full  flex flex-col mx-auto">
+              <label className="text-sm font-medium">Company Name</label>
+              <input
+                name="companyName"
+                value={form.companyName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Enter your company name here"
+                className="w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+              />
+              {errors.companyName && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.companyName}
+                </div>
+              )}
+            </div>
+
+            {/* Business Type */}
+            <div className="w-full  flex flex-col mx-auto">
+              <label className="text-sm font-medium">Business Type</label>
+              {/* MultiSelect Component */}
+              <div className="w-full mt-2">
+                <MultiSelect
+                  options={businessTypes}
+                  value={selectedBusinessTypes}
+                  onChange={handleOnbusinesschange}
+                  labelledBy="Business Type"
+                  hasSelectAll
+                  className="rmsc w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-4 text-sm"
+                />
               </div>
-            )}
-          </div>
-          <div className="w-1/12 h-[1px] bg-black"></div>
-          {/* Funding Range: Max */}
-          <div className="w-5/12 flex flex-col">
-            <input
-              type="number"
-              name="maxFunding"
-              placeholder="Max"
-              value={form.maxFunding}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-            />
-            {errors.maxFunding && (
-              <div className="text-red-500 text-sm">
-                {errors.maxFunding}
+
+              {errors.businessType && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.businessType}
+                </div>
+              )}
+            </div>
+
+            {/* Industry Sector */}
+            <div className="w-full  flex flex-col mx-auto">
+              <label className="text-sm font-medium">Industry & Sector</label>
+              {/* MultiSelect Component */}
+              <div className="w-full mt-2">
+                <MultiSelect
+                  options={industrySectors}
+                  value={selectedIndustries}
+                  onChange={handleOnindustrychange}
+                  labelledBy="Industry & Sector"
+                  hasSelectAll
+                  className="rmsc w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-4 text-sm"
+                />
               </div>
-            )}
+
+              {errors.industrySector && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.industrySector}
+                </div>
+              )}
+            </div>
+
+            {/* Business Model */}
+            <div className="w-full  flex flex-col mx-auto">
+              <label className="text-sm font-medium">Business Model</label>
+              {/* MultiSelect Component */}
+              <div className="w-full mt-2">
+                <MultiSelect
+                  options={businessModels}
+                  value={selectedBusinessModels}
+                  onChange={handleOnbusinessModelchange}
+                  labelledBy="Business Model"
+                  hasSelectAll
+                  className="rmsc w-full h-[60px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-4 text-sm"
+                />
+              </div>
+
+              {errors.businessModel && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.businessModel}
+                </div>
+              )}
+            </div>
+            {/* Stage */}
+            <div className="w-full flex flex-col mx-auto">
+              <label className="text-sm font-medium">Stage</label>
+              <div className="mt-2 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleStageSelect("Early")}
+                  className={`px-3 py-2 rounded-[6px] w-auto ${
+                    form.companyStage === "Early"
+                      ? "btn-gradient text-white"
+                      : "bg-[#EAF6FF]"
+                  } border border-[#BED6FF] text-sm`}
+                >
+                  Early Stage
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleStageSelect("Growth")}
+                  className={`px-3 py-2 rounded-[6px] w-auto ${
+                    form.companyStage === "Growth"
+                      ? "btn-gradient text-white"
+                      : "bg-[#EAF6FF]"
+                  } border border-[#BED6FF] text-sm`}
+                >
+                  Growth Stage
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleStageSelect("Mature")}
+                  className={`px-3 py-2 rounded-[6px] w-auto ${
+                    form.companyStage === "Mature"
+                      ? "btn-gradient text-white"
+                      : "bg-[#EAF6FF]"
+                  } border border-[#BED6FF] text-sm`}
+                >
+                  Mature Stage
+                </button>
+              </div>
+              {errors.companyStage && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.companyStage}
+                </div>
+              )}
+            </div>
+            <div className="w-full flex flex-col mx-auto">
+              <label className="text-sm font-medium">
+                Amount Required for Funding
+              </label>
+              <div className="w-full h-[46px] flex flex-row justify-between items-center mt-1">
+                {/* Funding Range: Min */}
+                <div className="w-5/12 flex flex-col">
+                  <input
+                    type="number"
+                    name="minFunding"
+                    placeholder="Min"
+                    value={form.minFunding}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+                  />
+                  {errors.minFunding && (
+                    <div className="text-red-500 text-sm">
+                      {errors.minFunding}
+                    </div>
+                  )}
+                </div>
+                <div className="w-1/12 h-[1px] bg-black"></div>
+                {/* Funding Range: Max */}
+                <div className="w-5/12 flex flex-col">
+                  <input
+                    type="number"
+                    name="maxFunding"
+                    placeholder="Max"
+                    value={form.maxFunding}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="w-full h-[46px] placeholder:text-black mt-2 outline-[#BED3FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+                  />
+                  {errors.maxFunding && (
+                    <div className="text-red-500 text-sm">
+                      {errors.maxFunding}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* Country */}
+            <div className="w-full flex flex-col mx-auto">
+              <label className="text-sm font-medium">Country</label>
+              <select
+                name="country"
+                value={form.country}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                aria-label="Country"
+                aria-placeholder="Select Country"
+                className="mt-2 w-full h-[60px] outline-[#BED6FF] placeholder:text-gray-300 border border-[#BED6FF] rounded-xl px-7 text-sm"
+              >
+                <option value="" disabled>
+                  Select Country
+                </option>
+                {Country.getAllCountries().map((c) => (
+                  <option key={c.isoCode} value={c.isoCode}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+              {errors.country && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.country}
+                </div>
+              )}
+            </div>
+
+            {/* State */}
+            <div className="w-full  flex flex-col mx-auto">
+              <label className="text-sm font-medium">State</label>
+              <select
+                name="state"
+                value={form.state}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="mt-2 w-full h-[60px] outline-[#BED6FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
+              >
+                <option value="" disabled>
+                  Select State
+                </option>
+                {State.getStatesOfCountry(form.country).map((s) => (
+                  <option key={s.isoCode} value={s.isoCode}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+              {errors.state && (
+                <div className="text-red-500 text-sm mt-1">{errors.state}</div>
+              )}
+            </div>
+
+            {/* City */}
+            <div className="w-full  flex flex-col mx-auto">
+              <label className="text-sm font-medium">City</label>
+              <select
+                name="city"
+                value={form.city}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="custom-select outline-[#BED6FF] mt-2 w-full h-[60px] border border-[#BED6FF] rounded-xl px-7 text-sm"
+              >
+                <option value="" disabled>
+                  Select City
+                </option>
+                {City.getCitiesOfState(form.country, form.state).map((c) => (
+                  <option key={c.name} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+              {errors.city && (
+                <div className="text-red-500 text-sm mt-1">{errors.city}</div>
+              )}
+            </div>
+
+            {/* Referrals */}
+            <div className="w-full  flex flex-col mx-auto">
+              <fieldset className="w-full h-[60px] flex flex-col gap-2">
+                <legend className="text-sm font-medium mb-2">
+                  How did you hear about us?
+                </legend>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="referrals"
+                    value="Facebook"
+                    checked={form.referrals.includes("Facebook")}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="btn-gradient"
+                  />{" "}
+                  Facebook
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="referrals"
+                    value="Instagram"
+                    checked={form.referrals.includes("Instagram")}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                     className="btn-gradient"
+                  />{" "}
+                  Instagram
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="referrals"
+                    value="YouTube"
+                    checked={form.referrals.includes("YouTube")}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                     className="btn-gradient"
+                  />{" "}
+                  YouTube
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="referrals"
+                    value="Friend"
+                    checked={form.referrals.includes("Friend")}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                     className="btn-gradient"
+                  />{" "}
+                  Friend
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="referrals"
+                    value="Others"
+                    checked={form.referrals.includes("Others")}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                     className="btn-gradient"
+                  />{" "}
+                  Others
+                </label>
+              {errors.referrals && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.referrals}
+                </div>
+              )}
+              </fieldset>
+            </div>
           </div>
-        </div>
-          
-        </div>
-        {/* Country */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">Country</label>
-          <select
-            name="country"
-            value={form.country}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            aria-label="Country"
-            aria-placeholder="Select Country"
-            className="mt-2 w-full h-[60px] outline-[#BED6FF] placeholder:text-gray-300 border border-[#BED6FF] rounded-xl px-7 text-sm"
-          >
-            <option value="" disabled>
-              Select Country
-            </option>
-            {Country.getAllCountries().map((c) => (
-              <option key={c.isoCode} value={c.isoCode}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-          {errors.country && (
-            <div className="text-red-500 text-sm mt-1">{errors.country}</div>
-          )}
-        </div>
-
-        {/* State */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">State</label>
-          <select
-            name="state"
-            value={form.state}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="mt-2 w-full h-[60px] outline-[#BED6FF] border border-[#BED6FF] rounded-xl px-7 text-sm"
-          >
-            <option value="" disabled>Select State</option>
-            {State.getStatesOfCountry(form.country).map((s) => (
-              <option key={s.isoCode} value={s.isoCode}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-          {errors.state && (
-            <div className="text-red-500 text-sm mt-1">{errors.state}</div>
-          )}
-        </div>
-
-        {/* City */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <label className="text-sm font-medium">City</label>
-          <select
-            name="city"
-            value={form.city}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="custom-select outline-[#BED6FF] mt-2 w-full h-[60px] border border-[#BED6FF] rounded-xl px-7 text-sm"
-          >
-            <option value="" disabled>Select City</option>
-            {City.getCitiesOfState(form.country, form.state).map((c) => (
-              <option key={c.name} value={c.name}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-          {errors.city && (
-            <div className="text-red-500 text-sm mt-1">{errors.city}</div>
-          )}
-        </div>
-
-        {/* Referrals */}
-        <div className="w-full min-w-[952px] flex flex-col mx-auto">
-          <fieldset className="w-full h-[60px] flex flex-col gap-2">
-            <legend className="text-sm font-medium mb-2">
-              How did you hear about us?
-            </legend>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="referrals"
-                value="Facebook"
-                checked={form.referrals.includes("Facebook")}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />{" "}
-              Facebook
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="referrals"
-                value="Instagram"
-                checked={form.referrals.includes("Instagram")}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />{" "}
-              Instagram
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="referrals"
-                value="YouTube"
-                checked={form.referrals.includes("YouTube")}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />{" "}
-              YouTube
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="referrals"
-                value="Friend"
-                checked={form.referrals.includes("Friend")}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />{" "}
-              Friend
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="referrals"
-                value="Others"
-                checked={form.referrals.includes("Others")}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />{" "}
-              Others
-            </label>
-          </fieldset>
-          {errors.referrals && (
-            <div className="text-red-500 text-sm mt-1">{errors.referrals}</div>
-          )}
-        </div>
-
         {/* Submit */}
-        <div className="w-full min-w-[952px] flex justify-end mx-auto mt-4">
-          <button
-            type="submit"
-            disabled={!isValid}
-            className={`w-[122px] h-[51px] rounded-xl font-semibold text-lg ${
-              isValid
-                ? "bg-[#1C4BC4] text-white"
-                : "bg-gray-300 text-gray-600 cursor-not-allowed"
-            }`}
-          >
-            Submit
-          </button>
+        <div className="h-8 w-full">
+          <div className="w-[97%] h-full flex justify-end">
+            <button
+              onClick={() => {
+                onSubmit;
+              }}
+              type="submit"
+              disabled={!isValid}
+              className={`w-[122px] h-[51px] rounded-xl font-semibold text-lg ${
+                isValid
+                  ? "btn-gradient text-white"
+                  : "bg-gray-300 text-gray-600 cursor-not-allowed"
+              }`}
+            >
+              Submit
+            </button>
+          </div>
         </div>
-      </form>
+        </form>
+      </div>
     </>
   );
 };

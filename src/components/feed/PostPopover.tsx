@@ -71,13 +71,13 @@ export function PostModal() {
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="rounded-md py-2 cursor-pointer justify-center text-black relative text-sm z-10"
+        className="rounded-md py-2 cursor-pointer justify-center text-black dark:text-white relative text-sm z-10"
       >
-        <MoreHorizontal />
+        <MoreHorizontal  />
       </button>
 
       <Dialog open={open} onClose={setOpen} className="relative z-50">
-        <DialogBackdrop className="fixed inset-0 bg-gray-500/75 transition-opacity" />
+        <DialogBackdrop className="fixed inset-0 bg-gray-800 transition-opacity" />
 
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <DialogPanel className="w-full max-w-md mx-auto mt-20 bg-white rounded-2xl border shadow-xl overflow-hidden">
