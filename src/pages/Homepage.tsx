@@ -20,10 +20,10 @@ const Homepage = () => {
   <div className="relative z-10">
     {/* Page content */}
     <div className="w-screen h-screen flex gap-0 overflow-x-hidden">
-      <div className="xl:w-1.5/12 md:overflow-hidden z-30"><Sidebar/></div>
-      <div className="max-xl:ml-[240px] ml-[11%]  w-8/12"><PostList/></div>
+      <div className="xl:w-1.5/12 md:overflow-hidden max-md:hidden  z-30 "><Sidebar/></div>
+      <div className="max-2xl:ml-[240px] max-md:ml-0 ml-[11%] max-md:ml-0 max-md:mr-0  w-8/12 max-md:w-12/12"><PostList/></div>
        {/* Right Sidebar */}
-            <div className="fixed right-0 top-0 w-[350px] h-full z-40 bg-white">
+            <div className="fixed max-md:hidden right-0 top-0 w-[350px] h-full z-40 bg-white">
               <RightSidebar />
             </div>
     </div>

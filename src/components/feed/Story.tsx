@@ -34,18 +34,18 @@ const Story: React.FC<Props> = ({ items }) => {
     <>
       <div
         ref={scrollRef}
-        className="w-full max-w-[700px] h-[82px] overflow-x-auto overflow-y-hidden flex gap-2 items-center px-2 scrollbar-none relative z-10"
+        className="max-md:w-[600px] w-full max-w-[700px] h-[82px] max-md:overflow-scroll overflow-y-hidden flex gap-2 items-center px-2 scrollbar-none relative z-10"
       >
         {items.map((item, index) => (
           <div
             key={index}
-            className="w-[73px] h-[76px] border-2 border-purple-500 rounded-full cursor-pointer flex justify-center items-center"
+            className=" w-[73px] h-[76px] border-2 border-purple-500 rounded-full cursor-pointer flex justify-center items-center"
             onClick={() => setActiveStory(item)}
           >
             <img
               src={item.imageSrc}
               alt={item.name}
-              className="w-[65px] h-[68px] rounded-full object-cover"
+              className=" max-md:w-[70px] w-[65px] h-[68px] rounded-full object-cover"
             />
           </div>
         ))}

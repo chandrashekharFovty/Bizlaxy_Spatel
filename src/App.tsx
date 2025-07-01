@@ -22,7 +22,7 @@ import MessagePage from "./pages/MessagePage";
 import Notifications from "./pages/Notifications";
 import AddsManager from "./pages/AddsManager";
 
-import Sidebar from "./components/layout/Sidebar";
+import Sidebar, { Footer, Header } from "./components/layout/Sidebar";
 import Category from "./components/Shops/Categories";
 import ProductList from "./components/Shops/ProductList";
 import ProductCartDetial from "./components/Shops/ProductCardDetails";
@@ -55,6 +55,7 @@ import MostView from "./components/Shops/MostView";
 import ShopProduct from "./components/Shops/ShopProducts";
 import CreatePost from "./components/feed/CreatePost/CreatePost";
 import ShopProfile from "./components/Shops/ShopProfile";
+import Layout from "./components/layout/layout";
 
 
 const appRouter = createBrowserRouter([
@@ -69,8 +70,9 @@ const appRouter = createBrowserRouter([
   { path: "/infoform", element: <InfoForm /> },
 
   // Private Routes
+   {path:"/layout",  element:<Layout/>},
   { path: "/feed", element: <PrivateRoute><HomePage /></PrivateRoute> },
-  { path: "/sidebar", element: <PrivateRoute><Sidebar /></PrivateRoute> },
+  // { path: "/sidebar", element: <PrivateRoute><Sidebar /></PrivateRoute> },
   { path: "/shop", element: <PrivateRoute><Shop /></PrivateRoute> },
   { path: "/pitch", element: <PrivateRoute><Pitch /></PrivateRoute> },
   { path: "/explore", element: <PrivateRoute><ExplorePage /></PrivateRoute> },
@@ -132,7 +134,7 @@ function App() {
     <div className="dark:bg-gray-800 dark:text-white w-screen h-screen overflow-x-hidden">
       <RouterProvider router={appRouter} />
       <Toaster />
-      <Sonner />
+
     </div>
   );
 }

@@ -10,7 +10,7 @@ interface SuggestedContentProps {
 
 export function SuggestedContent({ title, items }: SuggestedContentProps) {
   return (
-    <div className="w-full mt-4 rounded-[0px_0px_0px_0px]">
+    <div className="max-md:w-screen  w-full mt-4 rounded-[0px_0px_0px_0px]">
       <div className="flex items-center gap-[40px_100px] justify-between flex-wrap">
         <div className="dark:text-white  text-[#050505] text-lg font-bold self-stretch my-auto">
           {title}
@@ -19,11 +19,11 @@ export function SuggestedContent({ title, items }: SuggestedContentProps) {
           See all
         </div>
       </div>
-      <div className="mt-[22px] border-transparent rounded-xl">
-        <div className="gap-5 flex max-md:flex-col max-md:items-stretch border-transparent rounded-xl">
+      <div className="mt-[22px]  border-transparent rounded-xl">
+        <div className="max-md:flex  max-md:overflow-scroll gap-5 flex max-md:flex-row max-md:items-stretch border-transparent rounded-xl">
           {items.map((item, index) => (
-            <div key={index} className="w-[33%] max-md:w-full max-md:ml-0 border-transparent rounded-xl">
-              <div className="flex flex-col relative aspect-[0.478] grow text-sm text-white font-medium tracking-[-0.14px] pt-[166px] rounded-xl max-md:mt-[18px] max-md:pt-[100px]">
+            <div key={index} className=" w-[33%] max-md:w-full max-md:ml-0 border-transparent rounded-xl">
+              <div className="max-md:w-[160px]  max-md:h-[250px] max-md:flex  flex flex-col relative aspect-[0.478] grow text-sm text-white font-medium tracking-[-0.14px] pt-[166px] rounded-xl max-md:mt-[18px] max-md:pt-[100px]">
                 <img
                   src={item.image}
                   className="absolute h-full w-full object-cover inset-0 border-transparent rounded-xl"

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProfileHeader from "../components/profile/ProfileHeader";
 import ProfileTabs from "../components/profile/ProfileTabs";
 import Sidebar from "../components/layout/Sidebar";
+import { Link } from "react-router-dom";
 
 type TabType = "post" | "eduvid" | "pitch" | "shop";
 
@@ -55,4 +56,18 @@ const ProfilePager: React.FC = () => {
   );
 };
 
+
+export function profile(){
+  const shivi="https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/77ee2a13878e5475d16b71f74e65e9101dc67f8d?placeholderIfAbsent=true"
+  return(
+    <>
+   |<div>
+     <Link to="/profile">
+    <img src={"https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/77ee2a13878e5475d16b71f74e65e9101dc67f8d?placeholderIfAbsent=true"}
+    alt="profile"/>
+    </Link>
+   </div>
+    </>
+  )
+}
 export default ProfilePager;

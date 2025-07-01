@@ -1,4 +1,5 @@
 import React from "react";
+import { MdOutlineNotificationsActive } from "react-icons/md";
 
 const notificationsToday = [
   {
@@ -56,7 +57,13 @@ const NotificationSection = ({ title, notifications }) => (
     </div>
   </div>
 );
-
+export function notify(){
+  return(
+    <>
+         <MdOutlineNotificationsActive size={36}/>
+    </>
+  )
+}
 export default function Notifications() {
   return (
     <div className="dark:text-white dark:bg-gray-800 w-[837PX] h-auto mx-auto py-10 px-4 bg-gray-50 overflow-hidden">

@@ -108,24 +108,24 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
 
   return (
    <>
-    <div className="dark:border-x dark:border-gray-300 dark:glass-bg-dark dark:bg-gray-800 dark:text-white bg-white shadow p-5 rounded-xl w-full relative z-10">
+    <div className="dark:border-x dark:border-gray-300 dark:glass-bg-dark  max-md:w-80 bg-white shadow p-5 rounded-xl w-full relative z-10">
       <div className="flex justify-between py-[7px]">
-        <div className="flex gap-2">
+        <div className=" max-md:w-10 flex gap-2">
           <UserAvatar src={user.avatar} />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-base">{user.name}</span>
+              <span className=" flex max-md:text-xs font-medium text-base">{user.name}</span>
               {showMoreOptions && (
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/9e55e48d50c24f504973bb6ca3fab7e2ea80bba0?placeholderIfAbsent=true"
-                  className="w-5"
+                  className="w-5 max-md:w-4"
                 />
               )}
               {showOfficialIcon && <img src={officialIcon} className="w-3 h-3" />}
               {showFollowButton && (
                  <button
       onClick={handleFollowToggle}
-      className={`px-4 py-2`}
+      className={`px-4 py-2 max-md:text-sm`}
     >
       {isFollowing ? "Following" : "Follow"}
     </button>
@@ -143,8 +143,8 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
 
       <div className="text-sm mt-2.5 w-full">
         <div className="w-[660px]">
-          <div className="font-semibold">{content.title}</div>
-            <div className="dark:text-white text-[#464646] font-normal mt-2">
+          <div className="max-md:text-sm font-semibold">{content.title}</div>
+            <div className="max-md:text-xs max-md:w-72 dark:text-white text-[#464646] font-normal mt-2">
             {showFullDescription ? content.description : truncatedDescription}
             {content.description.length > content.descpLimit && (
               <button
@@ -157,7 +157,7 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
           </div>
 
           {isMediaContent && (
-            <div className="relative mt-5 border w-[650px] h-[692px] overflow-hidden rounded-2xl">
+            <div className="max-md:w-[280px] max-md:h-[300px] max-md:object-cover relative mt-5 border w-[650px] h-[692px] overflow-hidden rounded-2xl">
               <img
                 src={images[currentIndex]}
                 alt={`Slide ${currentIndex + 1}`}
@@ -192,7 +192,7 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
       </div>
 
       <div className="flex justify-between text-xs font-medium mt-3">
-        <div className="flex items-center gap-4">
+        <div className=" max-md:gap-1 flex items-center gap-4">
     <div
     onClick={handleLike}
     className="flex items-center gap-1 cursor-pointer border border-gray-400 h-8 px-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"

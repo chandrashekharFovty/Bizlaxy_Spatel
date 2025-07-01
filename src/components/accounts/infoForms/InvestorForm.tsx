@@ -148,28 +148,19 @@ const CompanyForm: React.FC = () => {
 
   const handleOnbusinesschange = (val) => {
     setSelectedBusinessTypes(val);
-<<<<<<< HEAD
     setbusinessvalue(val);
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
     handleChange(val);
     handleBlur(val);
   };
   const handleOnindustrychange = (val) => {
     setSelectedIndustries(val);
-<<<<<<< HEAD
     setindustryvalue(val);
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
     handleChange(val);
     handleBlur(val);
   };
   const handleOnbusinessModelchange = (val) => {
     setSelectedBusinessModels(val);
-<<<<<<< HEAD
     setvaluebusinessModel(val);
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
     handleChange(val);
     handleBlur(val);
   };
@@ -281,19 +272,11 @@ const CompanyForm: React.FC = () => {
         <div className="fixed w-full flex gap-1">
           {progressbarArray.map((_, index) => (
             <div
-<<<<<<< HEAD
               className="w-[5.8%] bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-indigo-200"
               key={index}
             >
               <div
                 className={`btn-gradient h-2.5 rounded-full dark:bg-indigo-500 ${
-=======
-              className="w-[5.8%] bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700"
-              key={index}
-            >
-              <div
-                className={`bg-gradient-to-tr from-indigo-600 to-purple-500 h-2.5 rounded-full dark:bg-indigo-500 ${
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                   index < progress ? "w-full" : "w-0"
                 }`}
               ></div>
@@ -398,11 +381,7 @@ const CompanyForm: React.FC = () => {
                   onClick={() => handleStageSelect("Early")}
                   className={`px-3 py-2 rounded-[6px] w-auto ${
                     form.companyStage === "Early"
-<<<<<<< HEAD
                       ? "btn-gradient text-white"
-=======
-                      ? "bg-gradient-to-br from-indigo-600 to-purple-500 text-white"
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                       : "bg-[#EAF6FF]"
                   } border border-[#BED6FF] text-sm`}
                 >
@@ -413,11 +392,7 @@ const CompanyForm: React.FC = () => {
                   onClick={() => handleStageSelect("Growth")}
                   className={`px-3 py-2 rounded-[6px] w-auto ${
                     form.companyStage === "Growth"
-<<<<<<< HEAD
                       ? "btn-gradient text-white"
-=======
-                      ? "bg-gradient-to-br from-indigo-600 to-purple-500 text-white"
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                       : "bg-[#EAF6FF]"
                   } border border-[#BED6FF] text-sm`}
                 >
@@ -428,11 +403,7 @@ const CompanyForm: React.FC = () => {
                   onClick={() => handleStageSelect("Mature")}
                   className={`px-3 py-2 rounded-[6px] w-auto ${
                     form.companyStage === "Mature"
-<<<<<<< HEAD
                       ? "btn-gradient text-white"
-=======
-                      ? "bg-gradient-to-br from-indigo-600 to-purple-500 text-white"
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                       : "bg-[#EAF6FF]"
                   } border border-[#BED6FF] text-sm`}
                 >
@@ -577,10 +548,7 @@ const CompanyForm: React.FC = () => {
                     checked={form.referrals.includes("Facebook")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-<<<<<<< HEAD
                     className="btn-gradient"
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                   />{" "}
                   Facebook
                 </label>
@@ -592,10 +560,7 @@ const CompanyForm: React.FC = () => {
                     checked={form.referrals.includes("Instagram")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-<<<<<<< HEAD
                      className="btn-gradient"
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                   />{" "}
                   Instagram
                 </label>
@@ -607,10 +572,7 @@ const CompanyForm: React.FC = () => {
                     checked={form.referrals.includes("YouTube")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-<<<<<<< HEAD
                      className="btn-gradient"
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                   />{" "}
                   YouTube
                 </label>
@@ -622,10 +584,7 @@ const CompanyForm: React.FC = () => {
                     checked={form.referrals.includes("Friend")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-<<<<<<< HEAD
                      className="btn-gradient"
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                   />{" "}
                   Friend
                 </label>
@@ -637,37 +596,21 @@ const CompanyForm: React.FC = () => {
                     checked={form.referrals.includes("Others")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-<<<<<<< HEAD
                      className="btn-gradient"
                   />{" "}
                   Others
                 </label>
-=======
-                  />{" "}
-                  Others
-                </label>
-              </fieldset>
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
               {errors.referrals && (
                 <div className="text-red-500 text-sm mt-1">
                   {errors.referrals}
                 </div>
               )}
-<<<<<<< HEAD
               </fieldset>
             </div>
           </div>
         {/* Submit */}
         <div className="h-8 w-full">
           <div className="w-[97%] h-full flex justify-end">
-=======
-            </div>
-          </div>
-        </form>
-        {/* Submit */}
-        <div className="fixed h-8 w-full">
-          <div className="w-[67%] h-full flex justify-end">
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
             <button
               onClick={() => {
                 onSubmit;
@@ -676,11 +619,7 @@ const CompanyForm: React.FC = () => {
               disabled={!isValid}
               className={`w-[122px] h-[51px] rounded-xl font-semibold text-lg ${
                 isValid
-<<<<<<< HEAD
                   ? "btn-gradient text-white"
-=======
-                  ? "bg-[#1C4BC4] text-white"
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
                   : "bg-gray-300 text-gray-600 cursor-not-allowed"
               }`}
             >
@@ -688,10 +627,7 @@ const CompanyForm: React.FC = () => {
             </button>
           </div>
         </div>
-<<<<<<< HEAD
         </form>
-=======
->>>>>>> 65f9c7bc070214b558fc45d45af264a27427c2f2
       </div>
     </>
   );

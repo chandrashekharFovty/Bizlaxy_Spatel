@@ -180,13 +180,13 @@ export function RightSidebar() {
 
   return (
     <>
-      <div className=" bg-white fixed overflow-hidden flex w-[370px] h-[982px] flex-col items-stretch border-[rgb(28, 75, 196, 100)] border-l">
+      <div className="max-md:hidden bg-white fixed overflow-hidden flex w-[370px] h-[982px] flex-col items-stretch border-[rgb(28, 75, 196, 100)] border-l">
         <div className="dark:dark-color overflow-hidden dark:text-white fixed w-[370px] h-screen scrollbar-hide bg-white flex flex-col items-stretch px-3">
           <div
             style={{ position: "relative", width: 300 }}
             className="mt-8 dark:dark-color grid w-[370px] h-[40px] cursor-default grid-cols-1 bg-white text-left rounded-3xl border-[2px] border-solid border-[#a89bfc] font-normal outline-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
           >
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center ">
               <SearchIcon className="text-gray-400 ml-2 w-5 h-5" />
               <input
                 type="text"

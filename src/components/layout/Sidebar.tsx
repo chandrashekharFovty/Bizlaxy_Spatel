@@ -13,6 +13,18 @@ import { CgAddR } from "react-icons/cg";
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import Create from "../../pages/Create";
 import Settings from "../../pages/Settings";
+import ProfilePager, {profile} from "@/pages/ProfilePager";
+import { SearchIcon } from "lucide-react";
+import MessagePage from "@/pages/MessagePage";
+import Notifications ,{notify} from "../notifications/Notifications";
+import Homepage from "@/pages/Homepage";
+import Pitch from "@/pages/Pitch";
+import ShopPage from "@/pages/ShopPage";
+import EduvidPage from "@/pages/EduvidPage";
+import { SearchInput } from "@/components/ui/SearchInput";
+
+
+
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
@@ -131,7 +143,7 @@ const Sidebar: React.FC = () => {
   }, []);
 
   return (
-    <div className="dark:dark-color bg-white fixed max-xl:w-60 min-h-[982px] max-h-screen w-[245px] max-lg:w-[70px] border-solid border-r-2 border-[#f3f2fa] pr-px z-40">
+    <div className=" dark:dark-color bg-white fixed max-xl:w-60 min-h-[982px] max-h-screen w-[245px] max-lg:w-[70px] max-md:hidden border-solid border-r-2 border-[#f3f2fa] pr-px z-40">
       <div className="cursor-pointer mt-8 max-lg:text-[16px] max-md:text-[16px] max-md:tracking-[0px] max-lg:tracking-[1px] text-[22px] md:font-normal uppercase ml-5 max-lg:w-[90px] max-lg:ml-1 w-[124px] h-[28px] tracking-[3px]">
         <Link to="/feed" className="font-medium">
           Bizlaxy
@@ -285,5 +297,49 @@ const Sidebar: React.FC = () => {
     </div>
   );
 };
+
+export function Header() {
+  return (
+    <div className="lg:hidden flex justify-between items-center p-4 border-b border-gray-200">
+      <Link to="/profile">
+         <img src={"https://cdn.builder.io/api/v1/image/assets/22e8f5e19f8a469193ec854927e9c5a6/77ee2a13878e5475d16b71f74e65e9101dc67f8d?placeholderIfAbsent=true"}
+         alt="profile" className="w-16 h-12 rounded-full"/>
+         </Link>
+
+      <div className="lg:hidden md:flex flex-row items-center ml-4  px-2 py-1 rounded">
+       <SearchInput/>
+      </div>
+
+      <div className="flex flex-row items-center gap-4">
+         <MdOutlineNotificationsActive size={36}/>
+         <LuMessageCircleMore size={36}/>
+      </div>
+    </div>
+  );
+}
+
+export function Footer() {
+  return (
+    <div className="block md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around py-2 z-50">
+      <Link to="/feed" className="flex flex-col items-center text-xs">
+        <GoHome size={24} />
+        <span>Home</span>
+      </Link>
+      <Link to="/pitch" className="flex flex-col items-center text-xs">
+        <FaChalkboardTeacher size={24} />
+        <span>Pitch</span>
+      </Link>
+      <Link to="/eduvid" className="flex flex-col items-center text-xs">
+        <PiGraduationCapBold size={24} />
+        <span>Eduvid</span>
+      </Link>
+      <Link to="/shop" className="flex flex-col items-center text-xs">
+        <CiShop size={24} />
+        <span>Shop</span>
+      </Link>
+    </div>
+  );
+}
+
 
 export default Sidebar;

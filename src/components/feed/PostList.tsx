@@ -3,6 +3,7 @@ import { Post } from "./Post";
 import { SuggestedContent } from "./SuggestedContent";
 import Story from "./Story";
 import { FaLaptopHouse } from "react-icons/fa";
+import Recommandetion from "./Recommandetion";
 
 const formatNumber = (number) =>
   new Intl.NumberFormat("en-US").format(Number(number.replace(/[^0-9]/g, "")));
@@ -229,22 +230,29 @@ export function PostList() {
   }
 
   return (
-  <div className="grow mt-6 max-md:mt-10  max-md:px-4 z-10 pb-8 ml-12">
+  <div className="grow mt-6 max-md:mt-10  max-md:px-4 z-10 pb-8 max-md:ml-0  max-md:mr-0">
   <div className="flex flex-col h-full mt-2 items-center gap-6 w-full">
     <Story items={storyItems} />
 
         <div className="dark:text-white flex flex-col gap-6 w-full max-w-[700px]">
-          {posts.slice(0, 4).map((post, index) => (
+          {posts.slice(0, 1).map((post, index) => (
             <Post key={index} {...post} />
           ))}
         </div>
-
+        <div className="dark:text-white flex flex-col gap-6 w-full max-w-[700px]">
+        <Recommandetion/>
+        </div>
+<div className=" dark:text-white flex flex-col gap-6 w-full max-w-[700px]">
+          {posts.slice(1, 4).map((post, index) => (
+            <Post key={index} {...post} />
+          ))}
+        </div>
         <div className="dark:text-white flex flex-col gap-6 w-full max-w-[700px]">
           <SuggestedContent {...suggestedContent} />
         </div>
        
         {viewMore && (
-          <div className="flex dark:text-white  flex-col gap-6 w-full max-w-[700px]">
+          <div className=" flex dark:text-white  flex-col gap-6 w-full max-w-[700px]">
             {posts.slice(0, 4).map((post, index) => (
               <Post key={index} {...post} />
             ))} 
