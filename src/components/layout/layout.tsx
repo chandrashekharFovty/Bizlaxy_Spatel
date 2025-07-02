@@ -4,7 +4,8 @@ import Sidebar, { Header, Footer } from "../layout/Sidebar";
 export default function Layout() {
   return (
     <>
-      <Header />
+   <div className="dark:dark-color w-screen h-screen">
+       <Header />
       <div className="flex">
         <div className="hidden md:block">
           <Sidebar />
@@ -14,6 +15,7 @@ export default function Layout() {
         </div>
       </div>
       <Footer />
+   </div>
     </>
   );
 }

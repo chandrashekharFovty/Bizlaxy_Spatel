@@ -56,6 +56,26 @@ import ShopProduct from "./components/Shops/ShopProducts";
 import CreatePost from "./components/feed/CreatePost/CreatePost";
 import ShopProfile from "./components/Shops/ShopProfile";
 import Layout from "./components/layout/layout";
+import MoreSetting from "./components/MoreSettingMobile/MoreSetting";
+import SwitchApp from "./components/MoreSettingMobile/SwitchApp";
+import ActiveStatus from "./components/MoreSettingMobile/ActiveStatus";
+import SavePosts from "./components/MoreSettingMobile/SavePosts";
+import GreenVerification from "./components/MoreSettingMobile/GreenVerification";
+import BlueVerification from "./components/MoreSettingMobile/BlueVerification";
+import HideStory from "./components/MoreSettingMobile/HideStory";
+import Blocked from "./components/MoreSettingMobile/Blocked";
+import AdOperation from "./components/MoreSettingMobile/AdOperation";
+import PrivacySetting from "./components/MoreSettingMobile/PrivacySetting";
+import { Wallet } from "lucide-react";
+import DeletAccount from "./components/MoreSettingMobile/DeletAccount";
+import ReportPro from "./components/MoreSettingMobile/ReportPro";
+import HelpCenter from "./components/MoreSettingMobile/HelpCenter";
+import Feedback from "./components/MoreSettingMobile/Feedback";
+import HidePeople from "./components/MoreSettingMobile/HidePeople";
+// import AddManager from "./components/MoreSettingMobile/AdManager";
+// import Bill1 from "./components/MoreSettingMobile/BillInfo";
+// import Bill2 from "./components/MoreSettingMobile/BillInfo2";
+
 
 
 const appRouter = createBrowserRouter([
@@ -121,6 +141,38 @@ const appRouter = createBrowserRouter([
 
 
 
+  // Mobile screen 
+  { path: "/moresetting", element: <PrivateRoute><MoreSetting/></PrivateRoute> },
+  { path: "/switch", element: <PrivateRoute><SwitchApp/></PrivateRoute> },
+  { path: "/active", element: <PrivateRoute><ActiveStatus/></PrivateRoute> },
+  { path: "/save", element: <PrivateRoute><SavePosts/></PrivateRoute> },
+  { path: "/green", element: <PrivateRoute><GreenVerification/></PrivateRoute> },
+  { path: "/blue", element: <PrivateRoute><BlueVerification/></PrivateRoute> },
+  { path: "/hide", element: <PrivateRoute><HideStory/></PrivateRoute> },
+  { path: "/block", element: <PrivateRoute><Blocked/></PrivateRoute> },
+  { path: "/operation", element: <PrivateRoute><AdOperation/></PrivateRoute> },
+  { path: "/privcy", element: <PrivateRoute><PrivacySetting/></PrivateRoute> },
+  { path: "/wallet", element: <PrivateRoute><Wallet/></PrivateRoute> },
+  { path: "/delete", element: <PrivateRoute><DeletAccount/></PrivateRoute> },
+  { path: "/feedback", element: <PrivateRoute><Feedback/></PrivateRoute> },
+  { path: "/help", element: <PrivateRoute><HelpCenter/></PrivateRoute> },
+  { path: "/report", element: <PrivateRoute><ReportPro/></PrivateRoute> },
+  { path: "/hidepeople", element: <PrivateRoute><HidePeople/></PrivateRoute> },
+
+
+
+  // Add Operation
+  // { path: "/manager", element: <PrivateRoute><AddManager/></PrivateRoute> },
+  // { path: "/bill1", element: <PrivateRoute><Bill1/></PrivateRoute> },
+  // { path: "/bill2", element: <PrivateRoute><Bill2/></PrivateRoute> },
+
+
+
+
+
+
+
+
 
 
 
@@ -131,7 +183,7 @@ const appRouter = createBrowserRouter([
 
 function App() {
   return (
-    <div className="dark:bg-gray-800 dark:text-white w-screen h-screen overflow-x-hidden">
+    <div className="w-screen h-screen overflow-x-hidden">
       <RouterProvider router={appRouter} />
       <Toaster />
 

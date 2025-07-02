@@ -4,6 +4,7 @@ import MostView from "./MostView";
 import ShopCarousel from "./ShopCarousel";
 import { Sidebar } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SearchInput } from "../ui/SearchInput";
 
 
 const Category = () => {
@@ -17,13 +18,9 @@ const Category = () => {
       <div className="dark:dark-color ml-[250px] p-4 w-full max-w-screen-xl mx-auto">
         {/* Search Bar */}
         <div className=" dark:dark-color h-[40px] my-5 flex justify-between items-center">
-          <div className=" dark:dark-color dark:border-solid dark:border-[#a89bfc] w-[95%] rounded-2xl mt-4 h-full flex border focus-within:border-[#BED6FF] border-gray-200 rounded-xl px-4">
-            <img src="/searchdark.png" alt="Search Icon" className="  w-5 h-5 my-auto" />
-            <input
-              type="text"
-              placeholder="Search Products..."
-              className="dark:dark-color outline-none font-medium  ml-1 px-2 text-[16px] w-full h-full"
-            />
+          <div className=" dark:dark-color dark:border-solid dark:border-[#a89bfc] w-[95%] mt-4 h-full flex  px-4">
+            {/* <img src="/searchdark.png" alt="Search Icon" className="  w-5 h-5 my-auto" /> */}
+          <SearchInput/>
           </div>
           <Link to="/shopprofile">
           <div className="dark:border-solid dark:border-[#a89bfc] text-center rounded-full flex justify-center items-center mt-4 border w-12 h-12 cursor-pointer">

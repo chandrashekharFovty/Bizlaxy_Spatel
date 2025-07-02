@@ -108,7 +108,7 @@ const [sharedUsers, setSharedUsers] = useState<string[]>([]);
 
   return (
    <>
-    <div className="dark:border-x dark:border-gray-300 dark:glass-bg-dark  max-md:w-80 bg-white shadow p-5 rounded-xl w-full relative z-10">
+    <div className="dark:border dark:border-gray-300 dark:glass-bg-dark  max-md:w-80 bg-white shadow p-5 rounded-xl w-full relative z-10">
       <div className="flex justify-between py-[7px]">
         <div className=" max-md:w-10 flex gap-2">
           <UserAvatar src={user.avatar} />

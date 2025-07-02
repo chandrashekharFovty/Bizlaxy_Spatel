@@ -15,7 +15,7 @@ const Pitch = () => {
       </div>
 
       {/* Main Content */}
-      <div className="dark:bg-gray-800 dark:text-white  mr-[350px] ml-[245px]">
+      <div className="dark:dark-color  pr-[350px] ml-[245px]">
         <MainContent/>
       </div>
 

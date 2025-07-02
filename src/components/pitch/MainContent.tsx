@@ -83,7 +83,7 @@ const pitchMedia = [
 ];
 const MainContent = () => {
   return (
-    <div className='dark:bg-gray-800 dark:text-white flex-1 ml-[245px] h-screen mt-4 overflow-y-auto scrollbar-hide py-6 px-4 space-y-6'>
+    <div className='dark:dark-color flex-1 ml-[245px] h-screen mt-4 overflow-y-auto scrollbar-hide py-6 px-4 space-y-6'>
           {pitchMedia.map((media, index) => (
           <div
             key={media.id}
