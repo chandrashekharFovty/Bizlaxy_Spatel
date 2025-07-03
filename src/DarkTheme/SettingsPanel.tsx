@@ -4,6 +4,8 @@ import Sidebar from "@/components/layout/Sidebar";
 import ProfileGallery from "@/components/profile/ProfileGallery";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { MdExpandLess } from "react-icons/md";
+import Settings from '../pages/Settings'
 
 // Sample gallery items
 const myItems = [
@@ -121,7 +123,7 @@ const settings = [
   },
   {
     title: "Privacy Setting",
-    path: "/privcy",
+    path: "/privacy",
     description: "Control who can view your profile.",
     details: {
       name: "Profile Privacy",
@@ -138,7 +140,7 @@ const settings = [
       content: "Check your wallet balance and transactions here.",
     },
   },
-  {
+    {
     title: "Delete Account",
     path: "/delete",
     description: "Delete your account permanently.",
@@ -147,10 +149,14 @@ const settings = [
       content: "This action will delete your account permanently.",
     },
   },
-  {
+ 
+];
+
+const secondSettings=[
+    {
     title: "Feedback",
     path: "/feedback",
-    description: "Share your feedback.",
+    description: "Submit your feedback or suggestions easily to improve your experience.",
     details: {
       name: "Feedback",
       content: "Help us improve by sharing your feedback.",
@@ -159,23 +165,25 @@ const settings = [
   {
     title: "Help Center",
     path: "/help",
-    description: "Visit the help center for support.",
+    description: "Browse our help center to find answers and support for your needs.",
     details: {
-      name: "Help Center",
-      content: "Find answers to common questions in our help center.",
+      name: "Delete Account",
+      content: "This action will delete your account permanently.",
     },
   },
-  {
+
+   {
     title: "Report a Problem",
     path: "/report",
-    description: "Report an issue you are facing.",
+    description: "Encounter an issue? Report bugs or abuse easily through our dedicated support channel.",
     details: {
       name: "Report a Problem",
       content:
         "Describe the issue you are facing and submit a report.",
     },
   },
-];
+]
+
 
 const SettingsPanel = () => {
   const [selectedSetting, setSelectedSetting] = useState(settings[0]);
@@ -212,27 +220,61 @@ const SettingsPanel = () => {
       </div>
 
       {/* Mobile - Left Side */}
-      <div className="lg:hidden space-y-4 w-full p-4">
-        <h2 className="text-xl font-bold mb-4">Account Settings</h2>
-        <p className="text-xs text-gray-400 mb-4">
-          Manage your account settings below.
-        </p>
-        {settings.map((item, index) => (
-          <button
-            key={index}
-            onClick={() => navigate(item.path)}
-            className="block w-full text-left"
-          >
-            <div className="flex justify-between items-start border-b pb-3 hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-gray-800 p-2 rounded-md transition-all">
-              <div>
-                <h3 className="font-semibold text-sm">{item.title}</h3>
-                <p className="text-xs text-gray-500">{item.description}</p>
-              </div>
-              <ChevronRight className="text-gray-400" />
+<div className="relative h-screen flex flex-col">
+
+  {/* Fixed Header */}
+  <div className="lg:hidden flex items-center p-4 border-b">
+    <MdExpandLess className="transform rotate-[-90deg] text-[40px]" />
+    <span className="text-xl font-bold ml-2">Account Settings</span>
+  </div>
+
+  {/* Scrollable Content */}
+  <div className="flex-1 overflow-y-auto">
+    {/* Mobile - Left Side */}
+    <div className="lg:hidden space-y-6 w-full p-4">
+      <p className="text-sm font-semibold text-gray-400 mb-4">
+        Account Setting
+      </p>
+
+      {settings.map((item, index) => (
+        <button
+          key={index}
+          onClick={() => navigate(item.path)}
+          className="block w-full text-left"
+        >
+          <div className="flex justify-between items-start border-b pb-3 p-2 rounded-md transition-all">
+            <div>
+              <h3 className="font-semibold text-xl">{item.title}</h3>
+              <p className="text-sm text-gray-500">{item.description}</p>
             </div>
-          </button>
-        ))}
-      </div>
+            <ChevronRight className="text-gray-400" />
+          </div>
+        </button>
+      ))}
+    </div>
+
+    {/* Second Settings */}
+    <div className="lg:hidden space-y-4 w-full p-4 border-t-2 border-gray-100">
+      {secondSettings.map((item, index) => (
+        <button
+          key={index}
+             onClick={() => navigate(item.path)}
+          className="block w-full text-left"
+        >
+          <div className="flex justify-between items-start border-b pb-3  p-2 rounded-md transition-all">
+            <div>
+              <h3 className="font-semibold text-xl">{item.title}</h3>
+              <p className="text-sm text-gray-500">{item.description}</p>
+            </div>
+            <ChevronRight className="text-gray-400" />
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+  {/* <Settings/> */}
+</div>
+
 
       {/* Right Side */}
       <div className="max-md:hidden border-l pt-4 ml-10 pl-6 border-gray-200 flex-1">

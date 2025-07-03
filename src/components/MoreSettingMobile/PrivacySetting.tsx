@@ -23,7 +23,7 @@ function PrivacySetting() {
         <div className="dark:dark-color pt-20 pb-20 px-4 overflow-y-auto">
           <div className="dark:dark-color flex flex-col gap-4">
             {/* Reusable card structure */}
-            <LinkCard to="" title=" Story" />
+            <LinkCard to="/story" title=" Story" />
             <LinkCard to="" title=" Posts" />
             <LinkCard to="" title=" Eduvid" />
             <LinkCard to="" title=" Pitch" />

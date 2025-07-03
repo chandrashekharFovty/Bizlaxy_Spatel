@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import User from "../../countries_states_cities.json"
 
 const CompanyForm = () => {
   const navigate = useNavigate();
@@ -35,22 +36,22 @@ const CompanyForm = () => {
     setError((prev) => ({ ...prev, username: validatecompanyName(v) || "" }));
   };
   // --- 2. Generic change handler for inputs/selects
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type, ariaChecked } = e.target;
+ const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+  const { name, value, type } = e.target;
 
-    if (type === "checkbox") {
-      setForm((prev) => {
-        const newArr = prev.referrals.includes(value)
-          ? prev.referrals.filter((v) => v !== value)
-          : [...prev.referrals, value];
-        return { ...prev, referrals: newArr };
-      });
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
-  };
+  if (type === "checkbox") {
+    setForm((prev) => {
+      const newArr = prev.referrals.includes(value)
+        ? prev.referrals.filter((v) => v !== value)
+        : [...prev.referrals, value];
+      return { ...prev, referrals: newArr };
+    });
+  } else {
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+};
 
   // --- 3. Handle company stage button clicks
   const handleStageSelect = (stage: string) => {

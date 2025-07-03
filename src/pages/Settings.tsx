@@ -23,13 +23,13 @@ function AllSettings() {
       {/* <div className="w-[307px] h-[100px] rounded-3xl mt-6 px-4 flex flex-col"> */}
         <Link
           to="/settings"
-          className="dark:hover:text-gray-400 dark:text-white w-full  text-left px-2 py-1 flex mt-4"
+          className="max-md:hidden dark:hover:text-gray-400 dark:text-white w-full  text-left px-2 py-1 flex mt-4"
         >
          <IoMdSettings className="text-xl mr-2"/> Settings
         </Link>
 
         <button
-          className="dark:hover:text-gray-400 dark:text-white w-full  text-left px-2 mt-2  flex "
+          className="max-md:hidden dark:hover:text-gray-400 dark:text-white w-full  text-left px-2 mt-2  flex "
           onClick={toggleTheme}
         >
          <BsMoonStarsFill  className="text-xl mr-2"/> Switch Appearance

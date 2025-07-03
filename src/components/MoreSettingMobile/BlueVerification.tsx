@@ -1,80 +1,107 @@
-import React from "react";
-import { FaCheck } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import { MdExpandLess } from "react-icons/md";
 import { Link } from "react-router-dom";
-import approve from "../../../public/approve.png";
-import BlueTick from "../../../public/BlueTick.png";
+
+const images = [
+  {
+    img: "/image 161.png",
+    title: "Provide Basic Information",
+    description:
+      "Fill in your full name, date of birth, and contact details to begin the process.",
+  },
+  {
+    img: "/image 160.png",
+    title: "Verify Contact Information",
+    description:
+      "Enter the OTP sent to your registered email or phone number to confirm your identity.",
+  },
+  {
+    img: "/image 162.png",
+    title: "Upload Required Documents",
+    description:
+      "Government ID or Proof of Address",
+  },
+  {
+    img: "/image 164.png",
+    title: "Selfie for Authentication",
+    description:
+      "Take a real-time selfie to match with your submitted documents for added security.",
+  },
+  {
+    img: "/image 163.png",
+    title: "Submit for Review",
+    description:
+      "Review your details and submit. Verification usually completes within a few minutes.",
+  },
+];
+
+
 
 function BlueVerification() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-      {/* Fixed Header */}
-      <div className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-800 z-10 border-b border-gray-200 dark:border-gray-700 flex items-center">
-        <Link
-          to="/settings"
-          className="flex items-center font-semibold py-4 px-4"
-        >
-          <MdExpandLess className="transform rotate-[-90deg] text-2xl" />
-          <span className="font-bold text-xl ml-4">Blue Verification</span>
-        </Link>
-      </div>
+    <div className="p-4">
+      {/* Back Link */}
+      <Link to="/settings" className="flex items-center font-semibold mb-4">
+        <MdExpandLess className="transform rotate-[-90deg] text-[40px]" />
+      </Link>
 
-      {/* Content */}
-      <div className="pt-24 flex flex-col items-center px-4">
-        <img src={approve} alt="approve" className="h-16 w-16 mb-4" />
-        <h1 className="font-semibold text-2xl">Blue Verification</h1>
-        <p className="text-gray-500 dark:text-gray-400 pt-1 text-center">
-          Get verified and build trust with your audience.
+      {/* Title & Description */}
+      <div className="mb-6 text-center">
+        <h1 className="mt-8 text-2xl font-bold mb-2">Blue Verification</h1>
+        <p className="text-gray-700 mt-2 text-sm">
+          Build credibility and trust across the Bizlaxy ecosystem <br />
+          by completing your investor verification. Verified <br />
+          accounts gain access to exclusive pitch insights, <br />
+          investor tools, and visibility in trusted networks.
         </p>
+      </div>
 
-        <div className="pt-10 w-full max-w-md text-sm text-gray-500 dark:text-gray-400">
-          <p>
-            All users can apply for Blue Verification. However, if you are a
-            Company, Startup, Startup Idea Holder, or Investor, you must first
-            complete Green Verification to become eligible.
-          </p>
-        </div>
+      {/* Proper Slide Container */}
 
-        <div className="pt-16 w-full max-w-md">
-          <h1 className="text-xl font-semibold">Eligibility Criteria</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 pt-4">
-            To qualify for Blue Verification, your account must meet
-            <br /> all of the following requirements:
-          </p>
-
-          <div className="flex flex-col space-y-4 pt-6">
-            <label className="flex items-center space-x-2">
-              <img src={BlueTick} alt="blue" className="h-6 w-6" />
-
-              <span>Valid and accurate documentation.</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <img src={BlueTick} alt="blue" className="h-6 w-6" />
-
-              <span>At least 5,000 followers.</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <img src={BlueTick} alt="blue" className="h-6 w-6" />
-
-              <span>You or your brand must be recognizable or notable.</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <img src={BlueTick} alt="blue" className="h-6 w-6" />
-
-              <span>At least one active post with good engagement.</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <img src={BlueTick} alt="blue" className="h-6 w-6" />
-
-              <span>Your account must be well-organized and complete.</span>
-            </label>
-          </div>
+      <div className="relative overflow-hidden w-[340px] h-full mx-auto">
+        <div
+          className="flex transition-transform duration-500"
+          style={{
+            transform: `translateX(-${currentIndex * 20}%)`,
+            width: `${images.length * 100}%`,
+          }}
+        >
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="w-[340px]  h-[280px] mt-14 flex-shrink-0 text-center relative"
+            >
+              {/* Image with overlay text */}
+              <img
+                src={image.img}
+                alt={image.title}
+                className="ml-20 w-[210px] h-[200px] object-cover"
+              />
+              <div className="absolute left-0 mt-2 right-0 px-4 text-white">
+                <h3 className="font-semibold  text-black text-lg">
+                  {image.title}
+                </h3>
+                <p className="text-sm text-black">{image.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+    <button
+  className="mt-14 ml-4  bg-blue-800 text-xl font-semibold rounded text-white h-14 w-[370px] flex items-center justify-center"
+>
+  Apply For Verification
+</button>
+
     </div>
   );
 }
